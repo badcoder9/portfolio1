@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+$primary: #047aed;
+$secondary: #1c3fa8;
+$dark: #002240;
+$light: #f4f4f4;
+
+@import 'common';
+
+
+*{    
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: #333;
+}
+
+h1, h2{
+    font-weight: 300;
+    line-height: 1.2;
+    margin: 10px 0;
+}
+
+p{
+    margin: 10px 0;
+}
+
+img{
+    width: 100%;
+}
+
+
+
+
+
+// tablets
+@media (max-width: 768px){
+    
+}
+
+
+// phones
+@media (max-width: 500px){
+    header{
+        .navbar{
+            height: 110px;
+            .flex{
+                flex-direction: column;
+            }
+            ul{
+                padding: 10px;
+                background-color: rgba(0,0,0,.1);
+            }
+        }
+    }
+}
+
+// animations
+@keyframes slideInFromLeft{
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    90%{
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes slideInFromRight{
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    90%{
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes slideInFromTop{
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes slideInFromBottom{
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
