@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
-$primary: #047aed;
+$primary: #0373E2;
 $secondary: #1c3fa8;
 $dark: #002240;
 $light: #f4f4f4;
 
 @import 'common';
+@import 'header';
+@import 'maker';
 
 
 *{    
@@ -46,27 +48,89 @@ img{
 
 
 
-
+@media (max-width: 900px){
+    .maker-intro{
+        .flex{
+            justify-content: center;
+        }
+        .content-img{
+            display: none;
+            visibility: hidden;
+        }
+        .content-text{
+            text-align: center;
+            .content-text-img{
+                display: block;
+                visibility: visible;
+            }
+        }
+    }
+}
 // tablets
 @media (max-width: 768px){
-    
+    header{
+        .navbar{
+            .container{
+                position: relative;
+                overflow: visible;
+            }
+            .main-nav{
+                display: none;
+                visibility: hidden;
+            }
+            .main-nav.open{
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 300px;
+                height: 100vh;
+                background-color: $light;
+                display: block;
+                visibility: visible;
+
+                li:not(:first-child){
+                    margin: 0 20px;
+                    padding: 10px;
+                    a{
+                        color: $dark;
+                    }
+                }
+                li:not(:last-child):not(:first-child){
+                    border-bottom: 1px solid $dark;
+                }
+                li:first-child{
+                    display: block;
+                    visibility: visible;
+                    margin: 30px 20px;
+                    button{
+                        margin-left: auto;
+                    }
+                }
+            }
+            .menu-toggle{
+                display: block;
+                visibility: visible;
+            }
+        }
+    }
 }
 
 
 // phones
 @media (max-width: 500px){
-    header{
-        .navbar{
-            height: 110px;
-            .flex{
-                flex-direction: column;
-            }
-            ul{
-                padding: 10px;
-                background-color: rgba(0,0,0,.1);
-            }
-        }
-    }
+    // old code
+    // header{
+    //     .navbar{
+    //         height: 110px;
+    //         .flex{
+    //             flex-direction: column;
+    //         }
+    //         ul{
+    //             padding: 10px;
+    //             background-color: rgba(0,0,0,.1);
+    //         }
+    //     }
+    // }
 }
 
 // animations

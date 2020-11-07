@@ -1,0 +1,30 @@
+.maker-intro{
+    background-color: $primary;
+    .flex{
+        justify-content: space-between;
+    }
+
+    h1{
+        font-size: 40px;
+    }
+
+    .content-text{
+        color: #fff;
+        max-width: 500px;
+
+        .content-text-img{
+            display: none;
+            visibility: hidden;
+            img{
+                width: auto;
+            }
+        }
+    }
+    .content-img{
+        img{
+            border-radius: 5px;
+        }
+        
+    }
+    
+}
