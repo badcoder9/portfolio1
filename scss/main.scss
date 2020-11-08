@@ -6,7 +6,8 @@ $light: #f4f4f4;
 
 @import 'common';
 @import 'header';
-@import 'maker';
+@import 'homepage';
+@import 'footer';
 
 
 *{    
@@ -16,6 +17,10 @@ $light: #f4f4f4;
     border: 0;
 }
 
+*:focus, *[tabindex="0"]{
+    outline: 2px dashed;
+    outline-offset: 2px;
+}
 body{
     font-family: 'Lato', sans-serif;
     color: #333;
@@ -31,7 +36,7 @@ a{
     color: #333;
 }
 
-h1, h2{
+h1, h2, h3{
     font-weight: 300;
     line-height: 1.2;
     margin: 10px 0;
@@ -45,12 +50,22 @@ img{
     width: 100%;
 }
 
+.logo{
+    padding: 5px 10px;
+    background-color: $dark;
+    font-weight: 600;
+    color: #fff;
+    outline-color: #fff;
+}
 
 .logo-container{
     .logo{
         background-color: #fff;
         color: $dark;
     }
+}
+.sr-only{
+    background-color: $dark;
 }
 
 
@@ -120,24 +135,29 @@ img{
             }
         }
     }
+
+    .footer{
+        .container{
+            flex-direction: column;
+        }
+    }
 }
 
 
 // phones
 @media (max-width: 500px){
-    // old code
-    // header{
-    //     .navbar{
-    //         height: 110px;
-    //         .flex{
-    //             flex-direction: column;
-    //         }
-    //         ul{
-    //             padding: 10px;
-    //             background-color: rgba(0,0,0,.1);
-    //         }
-    //     }
-    // }
+    .maker-intro{
+        h1, p, .btn-outline{
+            background-color: $primary;
+        }
+    }
+    .footer{
+        nav{
+            a{
+                background-color: $dark;
+            }
+        }
+    }
 }
 
 // animations

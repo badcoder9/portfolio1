@@ -1,0 +1,28 @@
+.footer{
+    .container{
+        display: flex;
+
+        > *:not(:last-child){
+            margin-right: 40px;
+        }
+        .logo{
+            outline-color: orangered;
+        }
+
+        nav{
+            ul{
+                li{
+                    padding: 0 20px;
+                }
+            }
+        }
+        
+        .social{
+            margin-left: auto;
+
+            a:first-child{
+                margin-right: 20px;
+            }
+        }
+    }
+}
