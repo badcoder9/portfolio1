@@ -1,0 +1,14 @@
+.maker-top{
+    background-color: $light;
+    .container{
+        background-color: $light;
+        flex-direction: column;
+        align-items: flex-start;
+        h1{
+            font-size: 40px;
+        }
+        p{
+            margin: 10px;
+        }       
+    }
+}

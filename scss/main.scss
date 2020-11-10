@@ -7,6 +7,7 @@ $light: #f4f4f4;
 @import 'common';
 @import 'header';
 @import 'homepage';
+@import 'maker';
 @import 'footer';
 
 
@@ -18,7 +19,7 @@ $light: #f4f4f4;
 }
 
 *:focus, *[tabindex="0"]{
-    outline: 2px dashed;
+    outline: 2px solid;
     outline-offset: 2px;
 }
 body{
@@ -56,6 +57,7 @@ img{
     font-weight: 600;
     color: #fff;
     outline-color: #fff;
+    outline-offset: 4px;
 }
 
 .logo-container{
@@ -68,7 +70,139 @@ img{
     background-color: $dark;
 }
 
+.contact{
+    .flex{
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .note{
+        .social{
+            a{
+                margin-right: 20px;
+                .sr-only{
+                    color: #fff;
+                }
+            }
+        }
+    }
+    .form-wrapper{
+        color: #333 !important; 
+        margin-top: 30px;
+        width: 100%;
+        form{
+            flex-direction: column;
+            align-items: flex-start;
+            .form-control.flex{
+                margin: 10px 0;
+                flex-direction: row;
+                i{
+                    margin-right: 5px;
+                }
+                p{
+                    line-height: 1.2;
+                    font-size: 12px;
+                }
+            }
+            input[type="text"],
+            input[type="email"],
+            textarea{
+                width: 250px;
+                padding: 8px 0;
+                border: none;
+                border-bottom: 1px solid #22202B;
+                outline-color: #22202B;
+                color: #fff;
+                text-indent: 10px;
+                &::placeholder{
+                    color: #444;
+                    opacity: .8;
+                }
+            }
+            textarea{
+                height: 60px;
+            }
+            .bot{
+                width: 100%;
+                margin: 10px 0;
+                input{
+                    width: 100px;
+                }
+            }
+            .send{
+                color: #333;
+                border-color: #333;
+            }
+        }
+    }
+}
 
+@media (min-width: 1024px){
+    .contact{
+        background: linear-gradient(110deg, $light 50%, #22202B 50%);
+        .flex{
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .note{
+            max-width: 400px;
+            .social{
+                a{
+                    margin-right: 20px;
+                }
+            }
+        }
+        .form-wrapper{
+            color: #fff !important;
+            margin-top: 0;
+            width: auto;
+            form{
+                flex-direction: column;
+                align-items: center;
+                .form-control.flex{
+                    margin: 10px 0;
+                    i{
+                        margin-right: 5px;
+                    }
+                    p{
+                        line-height: 1.2;
+                        font-size: 12px;
+                    }
+                }
+                input[type="text"],
+                input[type="email"],
+                textarea{
+                    width: 250px;
+                    padding: 8px 0;
+                    border: none;
+                    border-bottom: 1px solid orange;
+                    background-color: #22202B;
+                    outline-color: #fff;
+                    color: #fff;
+                    text-indent: 10px;
+                    &::placeholder{
+                        color: #fff;
+                        opacity: .8;
+                    }
+                }
+                textarea{
+                    height: 60px;
+                }
+                .bot{
+                    width: 100%;
+                    margin: 10px 0;
+                    input{
+                        width: 100px;
+                    }
+                }
+                .send{
+                    color: #fff;
+                    border-color: #fff;
+                }
+            }
+        }
+    }
+}
 
 @media (max-width: 900px){
     .maker-intro{
@@ -130,8 +264,9 @@ img{
                 }
             }
             .menu-toggle{
-                display: block;
+                display: flex;
                 visibility: visible;
+                outline-offset: 4px;
             }
         }
     }
@@ -160,6 +295,13 @@ img{
     }
 }
 
+@media (min-width: 769px) and (max-width: 1023px){
+    .contact{
+        .flex{
+            align-items: flex-start;
+        }
+    }
+}
 // animations
 @keyframes slideInFromLeft{
     0% {
