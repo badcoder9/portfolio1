@@ -56,7 +56,7 @@ img{
     background-color: $dark;
     font-weight: 600;
     color: #fff;
-    outline-color: #fff;
+    outline-color: #000;
     outline-offset: 4px;
 }
 
@@ -95,6 +95,7 @@ img{
             .form-control.flex{
                 margin: 10px 0;
                 flex-direction: row;
+                align-items: center;
                 i{
                     margin-right: 5px;
                 }
@@ -229,6 +230,7 @@ img{
             .container{
                 position: relative;
                 overflow: visible;
+                justify-content: space-between;
             }
             .main-nav{
                 display: none;
@@ -243,6 +245,14 @@ img{
                 background-color: $light;
                 display: block;
                 visibility: visible;
+                margin: 0;
+                z-index: 99;
+
+                a{
+                    &:hover{
+                        border-bottom: none;
+                    }
+                }
 
                 li:not(:first-child){
                     margin: 0 20px;
@@ -274,6 +284,19 @@ img{
     .footer{
         .container{
             flex-direction: column;
+        }
+    }
+
+    .maker-top{
+        .container{
+            .employment-list.flex{
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .card{
+                    width: 100%;
+                }
+            }
         }
     }
 }

@@ -8,10 +8,13 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     
-    <link rel="stylesheet" href="./css/maker.min.css">
     <link rel="stylesheet" href="./css/main.min.css">
 </head>
 <body>
+    <ul class="skip-links">
+        <li><a href="#main">Skip to page content</a></li>
+        <li><a href="#footer">Skip to page footer</a></li>
+    </ul>
     
     <!-- nav -->
     <header>
@@ -24,8 +27,8 @@
                     <ul class="main-nav">
                         <li><button class="close-menu flex"><i class="fas fa-times fa-2x"></i><span class="sr-only">Close Menu</span></button></li>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="maker.html">Maker</a></li>
-                        <li><a href="level.html">Level</a></li>
+                        <li><a href="maker.html" aria-current="page">Maker</a></li>
+                        <li><a href="projects.html">Projects</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                     <button class="menu-toggle flex"><i class="fas fa-bars fa-lg"></i><span class="sr-only">Menu Toggle</span></button>
@@ -46,13 +49,48 @@
                     I'm an employee of the medium sized company that reshapes the web and makes it 
                     accessible. Most of us will say website is a must-have for every business and I 
                     agree, and to add to that having an assistive version of the website isn't another 
-                    nice to have feature it should be considered a duty. With accessibility in mind, 
-                    I build this portfolio website.           
+                    nice to have feature it should be considered a duty. I build this portfolio website 
+                    with accessibility in mind.           
                 </p>
+                <h2 class="py-1">Employment</h2>
+                <blockquote>
+                    We are the sum of our experiences. No matter what or where you work, what matters is the lecture you learn from it.
+                </blockquote>
                 <p>
-                    I had opprotunity to work alone and in various team types and in my case 
-                    I enjoy myself more in the team based environment.
+                    Note: this page only show corporate employment, for freelance and pro bono projects you can find on <a class="website" href="projects.html">projects page</a>.
                 </p>
+                <div class="employment-list flex">
+                    <div class="employer card">
+                        <h3>Rhea Software d.o.o (Usablenet Partner)</h3>
+                        <p>
+                            Employer's website:
+                            <a href="http://rhea.rs/en/" class="website">Rhea Software d.o.o</a>
+                        </p> 
+                        <p class="duration">Employed: August 2019 - Present</p>
+                        <p class="position"><strong>Position:</strong> Quality Assurance Engineer</p>                       
+                        <p class="desc"><strong>Job Description:</strong>
+                            Adapting websites to comply with WCAG standards and guidelines.
+                        </p>
+                        <p class="tech"><strong>Technologies:</strong> HTML, CSS, Javascript, propriatery JS framework</p>
+                    </div>
+
+                    <div class="employer card">
+                        <h3>Tenfore Paying Institution</h3>
+                        <p>
+                            Employer's website: 
+                            <a href="https://www.tenfore.rs/en/homepage" class="website">Tenfore Paying Institution</a>
+                        </p> 
+                        <p class="duration">Employed: March 2018 - July 2019</p>
+                        <p class="position"><strong>Position:</strong> Customer Service Agent and Partner Tech Support</p>                       
+                        <p class="desc"><strong>Job Description:</strong>
+                            Providing requested information and various collaboration between clients, partners and internal departments.
+                             Tech support required to asure proprietery software to work as expected on client side with extended support
+                              for partners' hardware peripherals (card readers, printers, scanners etc.) that required additional adjustments 
+                              in software or OS settings.
+                        </p>
+                        <p class="tech"><strong>Technologies:</strong> Proprietery software and services</p>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- /maker heading -->
@@ -71,24 +109,29 @@
                 </div>
                 <div class="form-wrapper">
                     <h2 class="py-1">Contact Form</h2>
-                    <form action="" method="POST" class="flex">
+                    <form action="" method="POST" name="contact" class="flex" data-netlify="true" data-netlify-recaptcha="true">
+                        <input type="hidden" name="form-name" value="contact" aria-hidden="true"
+                        tabindex="-1" aria-label="netlify form requirement">
                         <div class="form-control flex">
                             <i class="fas fa-user"></i>
-                            <input type="text" class="py-1" id="username" placeholder="Your name..." aria-label="Name" required>
+                            <input type="text" name="name" class="py-1" id="username" placeholder="Your name..." aria-label="Name" required aria-describedby="error-name">
                         </div>
+                        <span class="error error-name hide" id="error-name">Please enter your name</span>
+                        
                         <div class="form-control flex">
                             <i class="fas fa-at"></i> 
-                            <input type="email" id="email" placeholder="Your email..." aria-label="email" required>
+                            <input type="email" name="email" id="email" placeholder="Your email..." aria-label="email" required aria-describedby="error-name">
                         </div>                
+                        <span class="error error-email hide" id="error-email">Please enter valid email</span>
+
                         <div class="form-control flex">
                             <i class="fas fa-envelope"></i>
-                            <textarea name="message" id="usertxt" aria-label="message" placeholder="your message" style="resize: none;" required></textarea>
+                            <textarea name="message" id="usertxt" aria-label="message" placeholder="your message" style="resize: none;" required aria-describedby="error-name"></textarea>
                         </div>
-                        <div class="form-control bot">
-                            <p>Enter number: <span class="random-nb">85</span> in the field below </p>
-                            <input type="text" id="bot-check" placeholder="number" required aria-label="bot protection, add number from text above">
-                        </div>
+                        <span class="error error-msg hide" id="error-msg">Please enter your message</span>
+
                         <div class="form-control flex">
+                            <div data-netlify-recaptcha="true"></div>
                             <input type="submit" value="Send" class="btn btn-outline send">
                         </div>
                     </form>
@@ -100,7 +143,7 @@
     </main>
 
     <!-- footer -->
-    <footer class="footer bg-dark py-3">
+    <footer class="footer bg-dark py-3" id="footer">
         <div class="container">
             <h2 class="sr-only">Footer</h2>
             <div class="logo-container py-1">
@@ -119,7 +162,7 @@
             </nav>
             <div class="social py-1">
                 <a href="#"><i class="fab fa-linkedin fa-lg"></i><span class="sr-only">My Linkedin profile</span></a>
-                        <a href="mailto:aleksandar.popov93@outlook.com"><i class="fas fa-envelope fa-lg"></i><span class="sr-only">E-mail</span></a>
+                <a href="mailto:aleksandar.popov93@outlook.com"><i class="fas fa-envelope fa-lg"></i><span class="sr-only">E-mail</span></a>
             </div>
         </div>
     </footer>
@@ -134,8 +177,9 @@
         $('.close-menu').on('click', function() {
             $(this).parents('.main-nav').removeClass('open').next().focus()
         })   
-        $('.main-nav a').on('click', function (e) {
+        $('.main-nav a[href="#contact"]').on('click', function (e) {
             var target = $(this.getAttribute('href'))
+            $(this).parents('.main-nav').removeClass('open')
             if (target.length) {
                 e.preventDefault();
                 $('html, body').stop().animate({
@@ -143,7 +187,7 @@
                 }, 1000);
                 $(target).focus()
             }
-        })  
+        })    
     </script>
 </body>
 </html>
