@@ -1,64 +1,185 @@
-.navbar{
-    // background-color: $primary;
-    // background-color: $light;
-    background-color: #fff;
-    color: #fff;
-    height: 70px;
-    .flex{
-        // justify-content: space-between;
+// header
+#header{
+    height: 80px;
+    display: flex;    
+    -webkit-box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.15);
+    box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.15);
+    .container{
         justify-content: flex-start;
-    }
-
-    ul{
-        display: flex;
-        margin-left: 20px;
-
-        a{
-            // color: #fff;
-            color: $dark;
-            padding: 10px;
-            margin: 0 5px;
-            // outline-color: $dark;
-
-            &:hover{
-                // border-bottom: 2px solid #fff;
-                border-bottom: 2px solid $dark;
-            }
+        justify-content: space-between;
+        .brand{
+            height: auto;
+            color: #222;
+            font-size: 1.5rem;
+            font-weight: bold;
+            width: 60px;
         }
-
-        li:first-child{
+        .menu-toggle{
+            // height: 1.5rem;
+            // width: 1.5rem;
+            justify-content: space-around;
+            background: #fff;
             display: none;
             visibility: hidden;
+            .line{
+                background-color: #222;
+                border-color: #222;
+                width: 1.5rem;
+            }
+        }
+        .desktop-nav{
+            .close{
+                background-color: #fff;
+                position: relative;
+                display: none;
+                height: 36px;
+                width: 36px;
+                top: 10px;
+                // right: 30px;
+                .line{
+                    position: absolute;
+                }
+                .line-1{
+                    z-index: 998;                
+                    transform: rotate(45deg);
+                }
+                .line-2{
+                    z-index: 999;
+                    transform: rotate(-45deg);
+                }
+            }
+            li:not(:last-child){
+                margin-right: 25px
+            }
+            a{
+                padding: .5rem;
+                text-decoration: none;
+                font-size: 1rem;
+                // border-radius: 10px;
+                border: 1px solid transparent;
+                &:hover{
+                    box-shadow: 0 0 10px #ffa300;
+                    border: 1px solid #ffa300;
+                }
+            }
+        }
+        .follow{
+            width: 60px;
+            a:first-child{
+                margin-right: 20px;
+            }
         }
     }
-
-    .menu-toggle{
-        // background-color: $primary;
-        // color: #fff;
-        background-color: $light;
-        color: $dark;
-        display: none;
-        visibility: hidden;
+}
+#footer{
+    -webkit-box-shadow: 0px -2px 3px -1px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px -2px 3px -1px rgba(0,0,0,0.15);
+    box-shadow: 0px -2px 3px -1px rgba(0,0,0,0.15);
+    height: auto;
+    .container{
+        justify-content: space-between;
+        height: 70px;
+        a{
+            text-decoration: none;
+            padding: 5px 0;
+            // margin: 5px 10px 5px 0;
+            &:focus{
+            outline-offset: 0;
+            }
+        }
     }
 }
-
-.skip-links{
-    width: 200px;
-    position: relative;
-    z-index: 99;
-    a{
-        padding: 10px;
-        background-color: #fff;
-        position: absolute;
-        top: -200px;
-        transition: top linear 250ms;
-        left: 0;
-
-        &:focus{
-            top: 0;
-            transition: top linear 250ms;
-            outline-offset: 0;
-            outline-color: orangered;
+@media (min-width: 600px) and (max-width: 768px){
+    #header{
+        .container{
+            // .desktop-nav{
+            //     li:not(:last-child){
+            //         margin-right: 15px;
+            //     }
+            // }
+            .follow{
+                display: none;
+                visibility: hidden;
+            }
+        }
+    }
+}
+@media (max-width: 600px){
+    #header{
+        height: auto;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        .container{
+            // padding: 0;
+            // flex-direction: column;
+            // .brand{
+            //     margin: 0;
+            // }
+            .menu-toggle{
+                display: flex;
+                visibility: visible;
+            }
+            .desktop-nav{
+                width: 100%;
+                display: none;
+                * {
+                    width: 100%;
+                }
+                ul{
+                   padding: 0 5px;
+                    flex-direction: column;
+                }
+                li{
+                    margin: 10px 0;
+                    text-align: center;
+                }
+                li:not(:last-child){
+                    margin-right: 0;
+                }
+            }
+            .desktop-nav.open{
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-end;
+                height: 100%;
+                position: absolute;
+                z-index: 99;
+                top: 0;
+                left: 0;
+                background-color: #fff;
+                .close{
+                    display: flex;
+                    visibility: visible;
+                    right: 10px;
+                }
+                ul{
+                    height: auto;
+                    margin-top: 5rem;
+                }
+                li:not(:last-child){
+                    border-bottom: 1px solid $dark;
+                }
+                li{
+                    margin: 0;
+                }
+                a{
+                    padding: 1rem .5rem;
+                    text-align: left;
+                    text-indent: 1rem;
+                }
+            }
+            .follow{
+                display: none;
+                visibility: hidden;
+            }
+        }
+    }
+    #footer{
+        .container{
+            flex-wrap: wrap;
         }
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test | Homepage</title>
+    <title>Aleksandar Popov | Homepage</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
@@ -15,7 +15,8 @@
     <!-- skip links -->
     <div class="skip-links">
         <ul>
-            <li><a href="#main">Skip to Page Content</a></li>
+            <li><a href="#skip-content">Skip to Page Content</a></li>
+            <li><a href="#skip-footer">Skip to Page Footer</a></li>
         </ul>
     </div>
 
@@ -29,45 +30,31 @@
                     <div class="line line-2"></div>
                 </button>
                 <ul class="flex">
-                    <li class="flex"><a href="index.html">Home</a></li>
+                    <!-- <li class="flex"><a href="index.html">Home</a></li> -->
                     <li class="flex"><a href="about.html">About Me</a></li>
-                    <li class="flex"><a href="#">Resume</a></li>
+                    <li class="flex"><a href="resume.html">Resume</a></li>
                     <li class="flex"><a href="#">Experience</a></li>
-                    <li class="flex"><a href="#">Contact</a></li>
+                    <li class="flex"><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
             <div class="follow flex">
-                <a href="#" aria-label="Linkedin"> <i role="presentation" class="fab fa-linkedin fa-lg"></i></a>
-                <a href="#" aria-label="Github"> <i role="presentation" class="fab fa-github fa-lg"></i></a>
+                <a href="#" aria-label="Linkedin"> <i class="fab fa-linkedin fa-lg"></i></a>
+                <a href="#" aria-label="Github"> <i class="fab fa-github fa-lg"></i></a>
             </div>
             <button class="menu-toggle flex-c" aria-label="Open Menu Navigation">
-                <!-- <div class="line line-1"></div>
+                <div class="line line-1"></div>
                 <div class="line line-2"></div>
-                <div class="line line-3"></div> -->
-                <i role="presentation" class="fas fa-bars fa-2x"></i>
+                <div class="line line-3"></div>
             </button>
         </div>        
     </header>
 
+    <!-- main content -->
     <main id="main">
-        <section id="about" class="flex">
-            <div class="container flex">
-                <article class="my-5">
-                    <div class="hidden-desktop flex my-2">
-                        
-                    </div>
-                    <h2 class="title">TESt</h2>
-                    <div class="text my-2 pr-2">
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi accusamus laudantium tenetur neque adipisci minima odit at perspiciatis reiciendis nesciunt.
-                        </p>
-                        <div class="actions flex my-2">
-                            <a href="#" class="btn btn-outline download my-1" target="_blank"><i class="fas fa-arrow-alt-circle-down"></i> Download CV <span role="presentation">(</span>PDF<span role="presentation">)</span></a> 
-                            <a href="#" class="btn btn-outline"><i class="fas fa-envelope"></i> Contact </a>
-                        </div>
-                    </div>
-                </article>                    
-            </div>
+        <section id="resume">
+            <!-- <div class="container flex">
+
+            </div> -->
         </section>
     </main>
 
@@ -75,12 +62,8 @@
     <footer id="footer">
         <h2 class="sr-only" id="skip-footer">Footer</h2>
         <div class="follow container flex">
-            <div class="my-1">
-                <a href="#" class="mr-1"> <i role="presentation" class="fab fa-linkedin fa-lg"></i> Linkedin</a>
-                <a href="#"> <i role="presentation" class="fab fa-github fa-lg"></i> Github</a>
-            </div>
+            <a href="#"> <i class="fab fa-linkedin fa-lg"></i> Linkedin</a>
             <p class="copy"> &copy; 2020. All Rights Reserved. </p>
-            <!-- <a href="#" class="go-top">Back to top</a> -->
         </div>
     </footer>
     
@@ -89,6 +72,7 @@
     <script>
         $(document).ready(function(){
             $('.menu-toggle').on('click', function(){
+
                 $(this).siblings('.desktop-nav').addClass('open')
                 $(this).parents('#header').siblings().addClass('hidden')
                 $(this).siblings('.desktop-nav').find('.close').focus()

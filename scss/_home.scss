@@ -1,0 +1,104 @@
+#about{
+    min-height: calc(100vh - 150px);
+    height: auto;
+    overflow: visible;
+    .container{
+        .hidden-desktop{
+            display: none;
+            img{
+                width: 280px;
+                border-radius: 10px;
+            }
+        }
+        .img-container{
+            justify-content: flex-start;
+            max-width: 50%;
+            img{
+                width: 280px;
+                border-radius: 10px;
+            }
+        }
+        article{
+            // max-width: 50%;
+            .text{
+                max-width: 68ch;
+                p{
+                    line-height: 1.8;
+                    font-size: 16px;
+                }
+                .actions{
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+                    .download{
+                        margin-right: 30px;
+                    }
+                    i{
+                        margin-right: 5px;
+                    }
+                    .btn-outline{
+                        &:hover{
+                            color: $light;
+                            background-color: $dark;
+                            border-color: $dark;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+#contact{
+    min-height: auto;
+    .container{
+        margin-bottom: 20px;
+        .text{
+            width: 70%;
+            p,a{
+                font-size: 16px;
+            }
+        }
+        .email{
+            h3{
+                font-size: 18px;
+            }
+            
+        }
+    }
+}
+@media (max-width: 600px){
+    #about{
+        .container{
+            .hidden-desktop{
+                display: flex;
+            }
+            .img-container{
+                display: none;
+            }
+            article{
+                max-width: calc(100% - 20px);
+                // margin: auto;
+                .text{
+                    padding: 0;
+                    .actions {
+                        justify-content: center;
+                        // .btn{
+                        //     margin: 10px;
+                        // }
+                        .download{
+                            margin-right: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #contact{
+        .container{
+            margin-bottom: 20px;
+            .text{
+                width: 100%;
+            }
+            
+        }
+    }
+}

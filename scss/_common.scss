@@ -1,179 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+body{
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
+ul{
+    list-style: none;
+}
+.bg-dark{
+    background-color: $dark;
+    color: $light;
+}
+.bg-light{
+    background-color: $light;
+    color: $dark;
+}
 .container{
-    max-width: 1100px;
+    max-width: 1280px;
     margin: 0 auto;
     overflow: auto;
     padding: 0 40px;
+    width: 100%;
 }
-
 .flex{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
-
-.grid{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    justify-content: center;
+.flex-c{
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    height: 100%;
 }
-
-.grid-3{
-    grid-template-columns: repeat(3, 1fr);
+a{
+    color: $dark;
 }
-
-.card{
-    background-color: #fff;
-    color: #333;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
-    padding: 20px;
-    margin: 10px;
+*:focus,
+[tabindex="0"]:focus{
+    outline-offset: 3px;
+    outline: 2px solid #ffa300;
 }
-
-.btn{
-    display: inline-block;
-    padding: 10px 30px;
-    cursor: pointer;
-    background-color: $primary;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-
-    &:hover{
-        transform: scale(.98);
-    }
-    i{
-        margin-left: 10px;
-    }
+.hidden{
+    display: none !important;
+    visibility: hidden !important;
 }
-
-.btn-outline{
-    background-color: transparent;
-    border: 1px solid #fff;
+.arrow{
+    width: 9px;
+    height: 9px;
+    box-shadow: -2px 2px 0 rgba(0,0,0,.8);
+    float: left;
+    transform: rotate(225deg);
 }
-
-.bg-primary, .btn-primary{
- background-color: $primary;
- color: #fff;
-}
-.bg-secondary, .btn-secondary{
-    background-color: $secondary;
-    color: #fff;
-}
-.bg-dark, .btn-dark{
-    background-color: $dark;
-    color: #fff;
-}
-.bg-light, .btn-light{
-    background-color: $light;
-    color: #333;
-}
-.bg-primary, .btn-primary,
-.bg-secondary, .btn-secondary,
-.bg-dark, .btn-dark{
+.skip-links{
+    position: relative;
+    z-index: 9;
     a{
-        color: #fff;
+        padding: 15px 20px;
+        position: absolute;
+        left: 0;
+        top: -200px;
+        background-color: #fff;
+        color: $dark;
+        text-decoration: none;
+         &:focus{
+            top: 0;
+            transition: top 300ms linear;
+            outline-offset: -2px;
+            outline-style: solid;
+        }
     }
 }
-
-.text-center{
-    text-align: center;
+.btn{
+    padding: 10px 15px;
+    text-decoration: none;
 }
-
-.lead{
-    font-size: 20px;
+.btn-outline{
+    border: 2px solid $dark;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 5px;
 }
-.sm{
-    font-size: 1rem;
+.line{
+    width: 2rem;
+    height: .1rem;
+    background-color: #222;
+    border-radius: 10px;
+    border: 1px solid #222;
 }
-.md{
-    font-size: 2em;
-}
-.lg{
-    font-size: 3rem;
-}
-.xl{
-    font-size: 4rem;
-}
-
 .my-1{
-    margin: 1rem 0;
+    margin: 10px 0;
 }
 .my-2{
-    margin: 1.5rem 0;
-}
-.my-3{
-    margin: 2rem 0;
-}
-.my-4{
-    margin: 3rem 0;
+    margin: 20px 0;
 }
 .my-5{
-    margin: 4rem 0;
+    margin: 50px 0;
 }
-.m-1{
-    margin: 1rem;
+.mr-1{
+    margin-right: 10px;
 }
-.m-2{
-    margin: 1.5rem;
+.px-2{
+    padding: 0 20px;
 }
-.m-3{
-    margin: 2rem;
-}
-.m-4{
-    margin: 3rem;
-}
-.m-5{
-    margin: 4rem;
-}
-
-.py-1{
-    padding: 1rem 0;
+.px-5{
+    padding: 0 50px;
 }
 .py-2{
-    padding: 1.5rem 0;
+    padding: 20px 0;
 }
-.py-3{
-    padding: 2rem 0;
+.pr-2{
+    padding-right: 20px;
 }
-.py-4{
-    padding: 3rem 0;
-}
-.py-5{
-    padding: 4rem 0;
-}
-.p-1{
-    padding: 1rem;
-}
-.p-2{
-    padding: 1.5rem;
-}
-.p-3{
-    padding: 2rem;
-}
-.p-4{
-    padding: 3rem;
-}
-.p-5{
-    padding: 4rem;
-}
-
-.alert{
-    background-color: $light;
-    padding: 10px 20px;
-    font-weight: bold;
-    margin: 15px 0;
-
-    i{
-        margin-right: 10px;
+@media (max-width: 600px){
+    .container{
+        padding: 0 15px;
     }
-}
-
-.hide{
-    display: none;
-    visibility: hidden;
+    .px-2{
+        padding: 0;
+    }
 }
