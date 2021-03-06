@@ -50,6 +50,50 @@
     </header>
 
     <main id="main">
+        <section id="hero">
+            <div class="container">
+                <div class="hero-actions flex">
+                    <div class="tab-list flex" role="tablist">
+                        <button class="tab active" role="tab" aria-controls="trp1" aria-selected="true" aria-label="Slide 1, Deals"></button>
+                        <button class="tab " role="tab" tabindex="-1" aria-controls="trp2" aria-selected="false" aria-label="Slide 2, News"></button>
+                    </div>
+                    <button class="pause-carousel flex hidden" aria-label="Pause slider autoplay">
+                        <i class="far fa-pause-circle fa-lg"></i>
+                    </button>
+                    <button class="play-carousel flex" aria-label="Turn on slider autoplay">
+                        <i class="far fa-play-circle fa-lg"></i>
+                    </button>
+                </div>
+                <div class="panel active tp1 flex" id="tp1" role="tabpanel">
+                    <div class="panel-content flex-c">
+                        <h1>heading 1 test 1</h1>
+                        <div class="panel-text">
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus excepturi quasi dicta expedita tenetur praesentium eaque ex amet voluptas nulla?</p>
+                            <ul>
+                                <li>item 1</li>
+                                <li>item 2</li>
+                                <li>item 3</li>
+                            </ul>                                        
+                        </div>
+                        <a href="#" class="btn">Discover 1</a>
+                    </div>
+                </div>
+                <div class="panel tp2 hidden flex" id="tp2" role="tabpanel">
+                    <div class="panel-content flex-c">
+                        <h1>heading 1 test 2</h1>
+                        <div class="panel-text">
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus excepturi quasi dicta expedita tenetur praesentium eaque ex amet voluptas nulla?</p>
+                            <ul>
+                                <li>item 1</li>
+                                <li>item 2</li>
+                                <li>item 3</li>
+                            </ul>                                        
+                        </div>
+                        <a href="#" class="btn">Discover 2</a>
+                    </div>
+                </div>                
+            </div>
+        </section>
         <section id="about" class="flex">
             <div class="container flex">
                 <article class="my-5">
@@ -98,6 +142,40 @@
                 $(this).parents('.desktop-nav').removeClass('open').siblings('.brand').removeClass('hidden')
                 $(this).parents('#header').siblings().removeClass('hidden')
                 $(this).parents('.desktop-nav').siblings('.menu-toggle').removeClass('hidden').focus()
+            })
+            
+            $('.tab').on('click', function(){
+                if(!$(this).hasClass('active')){     
+                    var id = $(this).index()
+                    $(this).parents('.hero-actions').siblings('.panel').eq(id)
+                    .addClass('active').removeClass('hidden')
+                    .siblings('.panel').removeClass('active').addClass('hidden')
+
+                    $(this).siblings().attr({
+                        'aria-selected': 'false',
+                        tabindex: '-1'
+                    }).removeClass('active')
+                    $(this).addClass('active').attr({
+                        'aria-selected': 'true',
+                        tabindex: '0'
+                    }).focus()
+                }
+            })
+            .on('keydown', function(e){
+                if(e.which == 39){
+                    if($(this).next().length){
+                        $(this).next().click()
+                    } else {
+                        $(this).siblings('.tab:first').click()
+                    }
+                }
+                if(e.which == 37){
+                    if($(this).prev().length){
+                        $(this).prev().click()
+                    } else {
+                        $(this).siblings('.tab:last').click()
+                    }
+                }
             })
         })
     </script>
