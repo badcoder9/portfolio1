@@ -89,6 +89,7 @@
     <script>
         $(document).ready(function(){
             $('.menu-toggle').on('click', function(){
+                $(this).addClass('hidden')
                 $(this).siblings('.desktop-nav').addClass('open')
                 $(this).parents('#header').siblings().addClass('hidden')
                 $(this).siblings('.desktop-nav').find('.close').focus()
@@ -96,7 +97,7 @@
             $('.close').on('click', function(){
                 $(this).parents('.desktop-nav').removeClass('open')
                 $(this).parents('#header').siblings().removeClass('hidden')
-                $(this).parents('.desktop-nav').siblings('.menu-toggle').focus()
+                $(this).parents('.desktop-nav').siblings('.menu-toggle').removeClass('hidden').focus()
             })
         })
     </script>
