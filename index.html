@@ -190,10 +190,12 @@
 
             $('.trigger').on('click', function(){
                 $('.dialog').addClass('open')
+                $('.dialog').siblings(':not(script)').attr('aria-hidden', 'true')
                 $('.dialog .close').focus()
             })
            $('.dialog .close').on('click', function(){
                $(this).parents('.dialog').removeClass('open')
+               .siblings().removeAttr('aria-hidden')
                $('.trigger').focus()
            })
         })
