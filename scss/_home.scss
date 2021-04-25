@@ -182,3 +182,9 @@
         }
     }
 }
+.dialog{
+    display: none;
+}
+.dialog.open{
+    display: block;
+}
