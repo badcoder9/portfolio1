@@ -190,12 +190,15 @@
 
             $('.trigger').on('click', function(){
                 $('.dialog').addClass('open')
-                $('.dialog').siblings(':not(script)').attr('aria-hidden', 'true').find('*').attr('aria-hidden', 'true')
+                $('.dialog').siblings(':not(script)').attr('aria-hidden', 'true').find('*').attr({
+                    'aria-hidden': 'true',
+                    role: 'presentation'
+                })
                 $('.dialog .close').focus()
             })
            $('.dialog .close').on('click', function(){
                $(this).parents('.dialog').removeClass('open')
-               .siblings().removeAttr('aria-hidden').find('*').removeAttr('aria-hidden')
+               .siblings().removeAttr('aria-hidden').find('*:not(i)').removeAttr('aria-hidden role')
                $('.trigger').focus()
            })
         })
