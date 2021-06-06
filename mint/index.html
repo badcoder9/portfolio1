@@ -293,10 +293,10 @@
             $('.close-dropdown').on('click', function(){
                 $(this).parents('.submenu').prev().click().focus()
             })
-            // $('.nav > ul > li > *').on('focusin', function(){
-            //     $(this).parent().siblings().find('> .expand').removeClass('expand')
-            //     .prev().attr('aria-expanded', 'false').removeClass('active')
-            // })
+            $('.nav > ul > li > a').on('focus', function(){
+                $(this).parent().siblings().find('> .expand').removeClass('expand')
+                .prev().attr('aria-expanded', 'false').removeClass('active')
+            })
         })
     </script>
 </body>

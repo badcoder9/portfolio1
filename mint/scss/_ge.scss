@@ -56,6 +56,7 @@ header{
                     }
                     .close-dropdown{
                         opacity: 0;
+                        height: 2.5rem;
                         &:focus{
                             opacity: 1;
                         }
