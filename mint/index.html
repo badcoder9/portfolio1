@@ -38,6 +38,7 @@
                                 <li><a href="#">Documentation</a></li>
                                 <li><a href="#">All Versions</a></li>
                             </ul>
+                            <button class="close-dropdown" aria-label="collapse downloads"><span class="ti-close"></span></button>
                         </section>
                     </li>
                     <li>
@@ -51,11 +52,12 @@
                                 <li><a href="#">Store</a></li>
                                 <li><a href="#">Mirrors</a></li>
                             </ul>
+                            <button class="close-dropdown" aria-label="collapse project"><span class="ti-close"></span></button>
                         </section>
                     </li>
                     <li>
                         <button class="has-submenu flex" id="about-btn" aria-expanded="false"><span class="btn-txt">About</span> <span class="ti-angle-down"></span></button>
-                        <section class="submenu about" aria-labelledby="#about-btn">
+                        <section class="submenu about" aria-labelledby="#about-btn" tabindex="-1">
                             <ul>
                                 <li><a href="#">About Mint</a></li>
                                 <li><a href="#">Team</a></li>
@@ -64,6 +66,7 @@
                                 <li><a href="#">Privacy & Cookies</a></li>
                                 <li><a href="#">Screenshots</a></li>
                             </ul>
+                            <button class="close-dropdown" aria-label="collapse about"><span class="ti-close"></span></button>
                         </section>
                     </li>
                     <li><a href="#" target="_blank" title="Opens mint blog domain in new tab">Blog</a></li>
@@ -281,18 +284,19 @@
                 $(this).parent().removeClass('expand').prev().focus()
             })
             $('.has-submenu').on('click', function(){
-                $(this).toggleClass('active').attr('aria-expanded', function(index, attr){
+                $(this).attr('aria-expanded', function(index, attr){
                     return attr == 'false' ? 'true' : 'false'
-                })
-                
-                $(this).parent().siblings().find('.has-submenu')
-                .removeAttr('active').attr('aria-expanded', 'false').next().removeClass('expand')
-				$(this).next().toggleClass('expand')
+                }).toggleClass('active').next().toggleClass('expand')
+                $(this).parent().siblings().find('.has-submenu').removeClass('active').attr('aria-expanded', 'false')
+                $(this).parent().siblings().find('.expand').removeClass('expand')
             })
-            $('.nav > ul > li > *').on('focus', function(){
-                $(this).parent().siblings().find('> .expand').removeClass('expand')
-                .prev().attr('aria-expanded', 'false').removeClass('active')
+            $('.close-dropdown').on('click', function(){
+                $(this).parents('.submenu').prev().click().focus()
             })
+            // $('.nav > ul > li > *').on('focusin', function(){
+            //     $(this).parent().siblings().find('> .expand').removeClass('expand')
+            //     .prev().attr('aria-expanded', 'false').removeClass('active')
+            // })
         })
     </script>
 </body>

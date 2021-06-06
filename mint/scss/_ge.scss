@@ -42,6 +42,7 @@ header{
                     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
                     border-radius: 5px;
                     z-index: 10;
+                    overflow: hidden;
                     ul{
                         width: 100%;
                         li{
@@ -51,6 +52,12 @@ header{
                         a{
                             padding: .5rem;
                             width: 100%;
+                        }
+                    }
+                    .close-dropdown{
+                        opacity: 0;
+                        &:focus{
+                            opacity: 1;
                         }
                     }
                 }
@@ -166,6 +173,9 @@ header{
                     margin: 5px 0;
                     width: 100%;
                     box-shadow: none;
+                    .close-dropdown{
+                        display: none;
+                    }
                 }
             }
         }
