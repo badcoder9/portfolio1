@@ -284,9 +284,10 @@
                 $(this).toggleClass('active').attr('aria-expanded', function(index, attr){
                     return attr == 'false' ? 'true' : 'false'
                 })
-                $(this).next().toggleClass('expand')
+                
                 $(this).parent().siblings().find('.has-submenu')
                 .removeAttr('active').attr('aria-expanded', 'false').next().removeClass('expand')
+				$(this).next().toggleClass('expand')
             })
             $('.nav > ul > li > *').on('focus', function(){
                 $(this).parent().siblings().find('> .expand').removeClass('expand')
