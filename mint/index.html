@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Mint | Homepage</title>
+
+    <link rel="stylesheet" href="./css/themify-icons.css">
+    <link rel="stylesheet" href="./css/main.min.css">
+
+
+</head>
+<body>
+    
+    <header>
+        <div class="container flex">
+            <div class="logo flex">
+                <a href="#">
+                    <img src="./img/Linux_Mint_Official_Logo.svg" alt="Linux Mint, go to Homepage">
+                </a>
+            </div>
+            <button class="menu-mobile" aria-label="Open Menu Navigation">
+                <span class="ti-menu"></span>
+            </button>
+            <nav class="nav">
+                <button class="menu-mobile-close flex" aria-label="Close Menu Navigation">
+                    <span class="ti-close"></span>
+                </button>
+                <ul class="flex">
+                    <li><a href="#">Home</a></li>
+                    <li>
+                        <button class="has-submenu flex" id="downloads-btn" aria-expanded="false"><span class="btn-txt">Downloads</span> <span class="ti-angle-down"></span></button>
+                        <section class="submenu" aria-labelledby="#downloads-btn">
+                            <ul>
+                                <li><a href="#">Linux Mint 20.1</a></li>
+                                <li><a href="#">Linux Mint Debian 4</a></li>
+                                <li><a href="#">Documentation</a></li>
+                                <li><a href="#">All Versions</a></li>
+                            </ul>
+                        </section>
+                    </li>
+                    <li>
+                        <button class="has-submenu flex" id="projects-btn" aria-expanded="false"><span class="btn-txt">Projects</span> <span class="ti-angle-down"></span></button>
+                        <section class="submenu" aria-labelledby="#projects-btn">
+                            <ul>
+                                <li><a href="#">Get Involved</a></li>
+                                <li><a href="#">Donors</a></li>
+                                <li><a href="#">Sponsors</a></li>
+                                <li><a href="#">Partners</a></li>
+                                <li><a href="#">Store</a></li>
+                                <li><a href="#">Mirrors</a></li>
+                            </ul>
+                        </section>
+                    </li>
+                    <li>
+                        <button class="has-submenu flex" id="about-btn" aria-expanded="false"><span class="btn-txt">About</span> <span class="ti-angle-down"></span></button>
+                        <section class="submenu about" aria-labelledby="#about-btn">
+                            <ul>
+                                <li><a href="#">About Mint</a></li>
+                                <li><a href="#">Team</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">Privacy & Cookies</a></li>
+                                <li><a href="#">Screenshots</a></li>
+                            </ul>
+                        </section>
+                    </li>
+                    <li><a href="#" target="_blank" title="Opens mint blog domain in new tab">Blog</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="breadcrumbs">
+            <div class="container">
+                <ul class="flex">
+                    <li> <a href="#">Home <span class="ti-angle-right"></span></a> </li>
+                    <li> <a href="#">Downloads <span class="ti-angle-right"></span></a> </li>
+                    <li> <span aria-current="true">Linux Mint 20.1</span> </li>
+                </ul>
+            </div>
+        </section>
+        <section class="top-section">
+            <div class="container flex">
+                <div class="wrapper flex-c">
+                    <div class="carousel">
+                        <div class="tabpanel active" id="tabpanel-1" role="tabpanel" aria-labelledby="tab-1">
+                            <div class="tab-content flex-c">
+                                <h1>Linux Mint 20.1 Cinnamon Edition</h1>
+                                <p>Slick, modern, innovative.</p>
+                                <ul>
+                                    <li><a href="#">New Features</a></li>
+                                    <li><a href="#">Release Notes</a></li>
+                                    <li><a href="#">Download Cinnamon<span class="ti-download"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tabpanel" id="tabpanel-2" role="tabpanel" aria-labelledby="tab-2">
+                            <div class="tab-content flex-c">
+                                <h1>Linux Mint 20.1 MATE Edition</h1>
+                                <p>stable, robust, traditional.</p>
+                                <ul>
+                                    <li><a href="#">New Features</a></li>
+                                    <li><a href="#">Release Notes</a></li>
+                                    <li><a href="#">Download MATE<span class="ti-download"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tabpanel" id="tabpanel-3" role="tabpanel" aria-labelledby="tab-3">
+                            <div class="tab-content flex-c">
+                                <h1>Linux Mint 20.1 Xfce Edition</h1>
+                                <p>Light, simple, efficient.</p>
+                                <ul>
+                                    <li><a href="#">New Features</a></li>
+                                    <li><a href="#">Release Notes</a></li>
+                                    <li><a href="#">Download Xfce<span class="ti-download"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="tablist flex" role="tablist">
+                            <button class="tab cinnamon" id="tab-1" role="tab" aria-selected="true">Cinnamon</button>
+                            <button class="tab mate" id="tab-2" role="tab" aria-selected="false">MATE</button>
+                            <button class="tab xfce" id="tab-3" role="tab" aria-selected="false">Xfce</button>
+                        </div>
+                    </div>
+                    <div class="appretiation flex">
+                        <div class="col-2 flex-c">
+                            <h2>Community Driven</h2>
+                            <div class="thanks">
+                                <p>
+                                    Linux Mint is funded by its community. Many thanks to all the people who financially support the project.
+                                </p>
+                                <ul class="">
+                                    <li> <a href="#" class="mint-dark">Donors</a> </li>
+                                    <li> <a href="#" class="mint-dark">Sponsors</a> </li>
+                                    <li> <a href="#" class="mint-dark">Partners</a> </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-2 flex-c">
+                            <h2>User Guide</h2>
+                            <div class="guide flex-c">
+                                <p>New to Mint? Our user guide is all you need to know to get started with Linux Mint.</p>
+                                <a href="#">Download User Guide <span class="ti-download"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- latest on blog -->
+                    <section class="latest-news flex-c">
+                        <h2>Latest News</h2>
+                        <article class="article">
+                            <header class="article-head">
+                                <h3><a href="#" class="mint-dark">Monthly News – May 2021</a></h3>
+                            </header>
+                            <footer class="article-footer">
+                                <p class="timestamp">Posted on Monday, 31 May 2021</p>
+                            </footer>
+                            <div class="content">
+                                <p>
+                                    Hello everyone! Before we start covering the news I’d like to thank our sponsors, partners and donors. Many thanks for your contributions and for your support. Many thanks also to all the people who help us in other ways with their ideas, their support and to all those who help our community with side projects […]
+                                </p>
+                                <a href="#" class="read-more" aria-label="Read more news from may 2021">Read more <span class="ti-arrow-right"></span></a>
+                            </div>
+                        </article>
+                        <article class="article">
+                            <header class="article-head">
+                                <h3><a href="#" class="mint-dark">Monthly News – April 2021</a></h3>
+                            </header>
+                            <footer class="article-footer">
+                                <p class="timestamp">Posted on Monday, 31 April 2021</p>
+                            </footer>
+                            <div class="content">
+                                <p>
+                                    Hello everyone! Before we start covering the news I’d like to thank our sponsors, partners and donors. Many thanks for your contributions and for your support. Many thanks also to all the people who help us in other ways with their ideas, their support and to all those who help our community with side projects […]
+                                </p>
+                                <a href="#" class="read-more" aria-label="Read more news from april 2021">Read more <span class="ti-arrow-right"></span></a>
+                            </div>
+                        </article>
+                        <article class="article">
+                            <header class="article-head">
+                                <h3><a href="#" class="mint-dark">Monthly News – March 2021</a></h3>
+                            </header>
+                            <footer class="article-footer">
+                                <p class="timestamp">Posted on Monday, 31 March 2021</p>
+                            </footer>
+                            <div class="content">
+                                <p>
+                                    Hello everyone! Before we start covering the news I’d like to thank our sponsors, partners and donors. Many thanks for your contributions and for your support. Many thanks also to all the people who help us in other ways with their ideas, their support and to all those who help our community with side projects […]
+                                </p>
+                                <a href="#" class="read-more" aria-label="Read more news from march 2021">Read more <span class="ti-arrow-right"></span></a>
+                            </div>
+                        </article>
+                        <div class="older-news">
+                            <p>To read older news <a href="#" class="blog mint-dark">visit our blog <span class="ti-new-window"></span></a>.</p>
+                        </div>
+                    </section>
+                </div>
+                
+                <div class="sidebar flex-c">
+                    <div class="contribute">
+                        <h2 class="sr-only">
+                            Support
+                        </h2>
+                        <div class="col flex">
+                            <a href="#" class="flex-c">
+                                <span class="ti-server"></span>
+                                Donate
+                            </a>
+                            <a href="#" class="flex-c">
+                                <span class="ti-comments"></span>
+                                Participate
+                            </a>
+                        </div>
+                    </div>
+                    <div class="social flex-c">
+                        <h2>Follow us</h2>
+                        <ul class="flex">
+                            <li><a href="#"><span class="ti-rss-alt"></span><span class="sr-only">RSS feed</span></a></li>
+                            <li><a href="#"><span class="ti-facebook"></span><span class="sr-only">mint on facebook</span></a></li>
+                            <li><a href="#"><span class="ti-twitter-alt"></span><span class="sr-only">mint on twitter</span></a></li>                            
+                            <li><a href="#"><span class="ti-github"></span><span class="sr-only">mint on github</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="sponsors flex-c">
+                        <h2>Sponsors</h2>
+                        <div class="sponsor">
+                            <a href="#" class="flex-c">
+                                <img src="./img/pia.png" alt="private internet access" width="100px" role="presentation">
+                                <p><strong>private</strong> internet access</p>
+                                <p>Protect yourself online.</p>
+                            </a>                          
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+        
+    </main>
+
+    <footer id="footer">
+        <h2 class="sr-only">Footer</h2>
+        <div class="container">
+            <div class="nav">
+                <ul class="flex">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Download</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Get Involved</a></li>
+                    <li><a href="#">About Mint</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Store</a></li>
+                    <li><a href="#">Privacy & Cookies</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>Linux Mint is free of charge (thanks to your donations and adverts on the website) and we hope you'll enjoy it.</p>
+
+                <p>Some of the packages we distribute are under the GPL. If you want to access their source code you can use the apt-get source command. If you can't find what you're looking for please write to root@linuxmint.com and we'll provide the source to you.</p>
+                    
+                <p>Linux Mint is copyrighted 2006 and trademarked through the Linux Mark Institute. All rights reserved. Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.</p> 
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function(){
+            $('.menu-mobile').on('click', function(){
+                $(this).next().addClass('expand').find('.menu-mobile-close').focus()
+            })
+            $('.menu-mobile-close').on('click', function(){
+                $(this).parent().removeClass('expand').prev().focus()
+            })
+            $('.has-submenu').on('click', function(){
+                $(this).toggleClass('active').attr('aria-expanded', function(index, attr){
+                    return attr == 'false' ? 'true' : 'false'
+                })
+                $(this).next().toggleClass('expand')
+                $(this).parent().siblings().find('.has-submenu')
+                .removeAttr('active').attr('aria-expanded', 'false').next().removeClass('expand')
+            })
+            $('.nav > ul > li > *').on('focus', function(){
+                $(this).parent().siblings().find('> .expand').removeClass('expand')
+                .prev().attr('aria-expanded', 'false').removeClass('active')
+            })
+        })
+    </script>
+</body>
+</html>
