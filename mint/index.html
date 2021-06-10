@@ -14,7 +14,7 @@
 <body>
     <div class="skip-to-links flex">
         <ul class="flex-c">
-            <li><a href="#main">Skip to page main content</a></li>
+            <li><a href="#mainLink">Skip to page main content</a></li>
             <li><a href="#footer">Skip to page footer</a></li>
         </ul>
     </div>
@@ -35,8 +35,8 @@
                 <ul class="flex">
                     <li><a href="#">Home</a></li>
                     <li>
-                        <button class="has-submenu flex" id="downloads-btn" aria-expanded="false"><span class="btn-txt">Downloads</span> <span class="ti-angle-down"></span></button>
-                        <section class="submenu" aria-labelledby="#downloads-btn">
+                        <button class="has-submenu flex" id="downloads-btn" aria-expanded="false"><span class="btn-txt">Downloads</span> <span class="ti-angle-down" aria-hidden="true"></span></button>
+                        <section class="submenu" aria-labelledby="downloads-btn">
                             <ul>
                                 <li><a href="#">Linux Mint 20.1</a></li>
                                 <li><a href="#">Linux Mint Debian 4</a></li>
@@ -47,8 +47,8 @@
                         </section>
                     </li>
                     <li>
-                        <button class="has-submenu flex" id="projects-btn" aria-expanded="false"><span class="btn-txt">Projects</span> <span class="ti-angle-down"></span></button>
-                        <section class="submenu" aria-labelledby="#projects-btn">
+                        <button class="has-submenu flex" id="projects-btn" aria-expanded="false"><span class="btn-txt">Projects</span> <span class="ti-angle-down" aria-hidden="true"></span></button>
+                        <section class="submenu" aria-labelledby="projects-btn">
                             <ul>
                                 <li><a href="#">Get Involved</a></li>
                                 <li><a href="#">Donors</a></li>
@@ -61,8 +61,8 @@
                         </section>
                     </li>
                     <li>
-                        <button class="has-submenu flex" id="about-btn" aria-expanded="false"><span class="btn-txt">About</span> <span class="ti-angle-down"></span></button>
-                        <section class="submenu about" aria-labelledby="#about-btn" tabindex="-1">
+                        <button class="has-submenu flex" id="about-btn" aria-expanded="false"><span class="btn-txt">About</span> <span class="ti-angle-down" aria-hidden="true"></span></button>
+                        <section class="submenu about" aria-labelledby="about-btn" tabindex="-1">
                             <ul>
                                 <li><a href="#">About Mint</a></li>
                                 <li><a href="#">Team</a></li>
@@ -83,11 +83,11 @@
     </header>
 
     <main id="main">
-        <section class="breadcrumbs">
+        <section class="breadcrumbs" aria-label="breadcrumbs">
             <div class="container">
                 <ul class="flex">
-                    <li> <a href="#">Home <span class="ti-angle-right"></span></a> </li>
-                    <li> <a href="#">Downloads <span class="ti-angle-right"></span></a> </li>
+                    <li> <a href="#" id="mainLink">Home <span class="ti-angle-right" aria-hidden="true"></span></a> </li>
+                    <li> <a href="#">Downloads <span class="ti-angle-right" aria-hidden="true"></span></a> </li>
                     <li> <span aria-current="true">Linux Mint 20.1</span> </li>
                 </ul>
             </div>
@@ -104,7 +104,7 @@
                                 <ul>
                                     <li><a href="#">New Features</a></li>
                                     <li><a href="#">Release Notes</a></li>
-                                    <li><a href="#">Download Cinnamon<span class="ti-download"></span></a></li>
+                                    <li><a href="#">Download Cinnamon<span class="ti-download" aria-hidden="true"></span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -116,7 +116,7 @@
                                 <ul>
                                     <li><a href="#">New Features</a></li>
                                     <li><a href="#">Release Notes</a></li>
-                                    <li><a href="#">Download MATE<span class="ti-download"></span></a></li>
+                                    <li><a href="#">Download MATE<span class="ti-download" aria-hidden="true"></span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -128,13 +128,13 @@
                                 <ul>
                                     <li><a href="#">New Features</a></li>
                                     <li><a href="#">Release Notes</a></li>
-                                    <li><a href="#">Download Xfce<span class="ti-download"></span></a></li>
+                                    <li><a href="#">Download Xfce<span class="ti-download" aria-hidden="true"></span></a></li>
                                 </ul>
                             </div>
                         </div>
                         
                         <div class="tablist flex" role="tablist">
-                            <button class="tab cinnamon" id="tab-1" role="tab" aria-selected="true">Cinnamon</button>
+                            <button class="tab cinnamon active" id="tab-1" role="tab" aria-selected="true">Cinnamon</button>
                             <button class="tab mate" id="tab-2" role="tab" aria-selected="false" tabindex="-1">MATE</button>
                             <button class="tab xfce" id="tab-3" role="tab" aria-selected="false" tabindex="-1">Xfce</button>
                         </div>
@@ -157,7 +157,7 @@
                             <h2>User Guide</h2>
                             <div class="guide flex-c">
                                 <p>New to Mint? Our user guide is all you need to know to get started with Linux Mint.</p>
-                                <a href="#">Download User Guide <span class="ti-download"></span></a>
+                                <a href="#">Download User Guide <span class="ti-download" aria-hidden="true"></span></a>
                             </div>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                                 <p>
                                     Hello everyone! Before we start covering the news I’d like to thank our sponsors, partners and donors. Many thanks for your contributions and for your support. Many thanks also to all the people who help us in other ways with their ideas, their support and to all those who help our community with side projects […]
                                 </p>
-                                <a href="#" class="read-more" aria-label="Read more news from may 2021">Read more <span class="ti-arrow-right"></span></a>
+                                <a href="#" class="read-more" aria-label="Read more news from may 2021">Read more <span class="ti-arrow-right" aria-hidden="true"></span></a>
                             </div>
                         </article>
                         <article class="article">
@@ -189,7 +189,7 @@
                                 <p>
                                     Hello everyone! Before we start covering the news I’d like to thank our sponsors, partners and donors. Many thanks for your contributions and for your support. Many thanks also to all the people who help us in other ways with their ideas, their support and to all those who help our community with side projects […]
                                 </p>
-                                <a href="#" class="read-more" aria-label="Read more news from april 2021">Read more <span class="ti-arrow-right"></span></a>
+                                <a href="#" class="read-more" aria-label="Read more news from april 2021">Read more <span class="ti-arrow-right" aria-hidden="true"></span></a>
                             </div>
                         </article>
                         <article class="article">
@@ -203,11 +203,11 @@
                                 <p>
                                     Hello everyone! Before we start covering the news I’d like to thank our sponsors, partners and donors. Many thanks for your contributions and for your support. Many thanks also to all the people who help us in other ways with their ideas, their support and to all those who help our community with side projects […]
                                 </p>
-                                <a href="#" class="read-more" aria-label="Read more news from march 2021">Read more <span class="ti-arrow-right"></span></a>
+                                <a href="#" class="read-more" aria-label="Read more news from march 2021">Read more <span class="ti-arrow-right" aria-hidden="true"></span></a>
                             </div>
                         </article>
                         <div class="older-news">
-                            <p>To read older news <a href="#" class="blog mint-dark">visit our blog <span class="ti-new-window"></span></a>.</p>
+                            <p>To read older news <a href="#" class="blog mint-dark">visit our blog <span class="ti-new-window" aria-hidden="true"></span></a>.</p>
                         </div>
                     </section>
                 </div>
@@ -231,10 +231,10 @@
                     <div class="social flex-c">
                         <h2>Follow us</h2>
                         <ul class="flex">
-                            <li><a href="#"><span class="ti-rss-alt"></span><span class="sr-only">RSS feed</span></a></li>
-                            <li><a href="#"><span class="ti-facebook"></span><span class="sr-only">mint on facebook</span></a></li>
-                            <li><a href="#"><span class="ti-twitter-alt"></span><span class="sr-only">mint on twitter</span></a></li>                            
-                            <li><a href="#"><span class="ti-github"></span><span class="sr-only">mint on github</span></a></li>
+                            <li><a href="#"><span class="ti-rss-alt" aria-hidden="true"></span><span class="sr-only">RSS feed</span></a></li>
+                            <li><a href="#"><span class="ti-facebook" aria-hidden="true"></span><span class="sr-only">mint on facebook</span></a></li>
+                            <li><a href="#"><span class="ti-twitter-alt" aria-hidden="true"></span><span class="sr-only">mint on twitter</span></a></li>                            
+                            <li><a href="#"><span class="ti-github" aria-hidden="true"></span><span class="sr-only">mint on github</span></a></li>
                         </ul>
                     </div>
                     <div class="sponsors flex-c">
