@@ -93,6 +93,7 @@
                     <div class="carousel">
                         <div class="tabpanel active" id="tabpanel-1" role="tabpanel" aria-labelledby="tab-1">
                             <div class="tab-content flex-c">
+                                <img src="./img/bg1.jpg" alt="">
                                 <h1>Linux Mint 20.1 Cinnamon Edition</h1>
                                 <p>Slick, modern, innovative.</p>
                                 <ul>
@@ -104,6 +105,7 @@
                         </div>
                         <div class="tabpanel" id="tabpanel-2" role="tabpanel" aria-labelledby="tab-2">
                             <div class="tab-content flex-c">
+                                <img src="./img/bg2.jpg" alt="">
                                 <h1>Linux Mint 20.1 MATE Edition</h1>
                                 <p>stable, robust, traditional.</p>
                                 <ul>
@@ -115,6 +117,7 @@
                         </div>
                         <div class="tabpanel" id="tabpanel-3" role="tabpanel" aria-labelledby="tab-3">
                             <div class="tab-content flex-c">
+                                <img src="./img/bg3.jpg" alt="">
                                 <h1>Linux Mint 20.1 Xfce Edition</h1>
                                 <p>Light, simple, efficient.</p>
                                 <ul>
@@ -270,6 +273,7 @@
                     
                 <p>Linux Mint is copyrighted 2006 and trademarked through the Linux Mark Institute. All rights reserved. Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.</p> 
             </div>
+            <p class="notice">This is not a commercial project. I built my vision of simple Linux Mint website for practice. All right belong to its rightful owners.</p>
         </div>
     </footer>
 
@@ -279,8 +283,20 @@
         jQuery(document).ready(function(){
             $('.menu-mobile').on('click', function(){
                 $(this).next().addClass('expand').find('.menu-mobile-close').focus()
+                $(this).attr({
+                    'aria-hidden': 'true',
+                    role: 'presentation'
+                })
+                .prev().attr({
+                    'aria-hidden': 'true',
+                    role: 'presentation'
+                }).parents('header').siblings('footer, main').attr({
+                    'aria-hidden': 'true',
+                    role: 'presentation'
+                })
             })
             $('.menu-mobile-close').on('click', function(){
+                $('*[aria-hidden][role="presentation"]').removeAttr('role aria-hidden')
                 $(this).parent().removeClass('expand').prev().focus()
             })
             $('.has-submenu').on('click', function(){
