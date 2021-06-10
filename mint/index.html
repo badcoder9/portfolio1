@@ -219,11 +219,11 @@
                         </h2>
                         <div class="col flex">
                             <a href="#" class="flex-c">
-                                <span class="ti-server"></span>
+                                <span class="ti-server" aria-hidden="true"></span>
                                 Donate
                             </a>
                             <a href="#" class="flex-c">
-                                <span class="ti-comments"></span>
+                                <span class="ti-comments" aria-hidden="true"></span>
                                 Participate
                             </a>
                         </div>
@@ -241,7 +241,7 @@
                         <h2>Sponsors</h2>
                         <div class="sponsor">
                             <a href="#" class="flex-c">
-                                <img src="./img/pia.png" alt="private internet access" width="100px" role="presentation">
+                                <img src="./img/pia.png" alt="private internet access" width="100px" aria-hidden="true" role="presentation">
                                 <p><strong>private</strong> internet access</p>
                                 <p>Protect yourself online.</p>
                             </a>                          
@@ -296,7 +296,7 @@
                 .prev().attr({
                     'aria-hidden': 'true',
                     role: 'presentation'
-                }).parents('header').siblings('footer, main').attr({
+                }).parents('header').siblings('footer, main, .skip-to-links').attr({
                     'aria-hidden': 'true',
                     role: 'presentation'
                 })
