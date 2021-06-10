@@ -12,7 +12,12 @@
 
 </head>
 <body>
-    
+    <div class="skip-to-links flex">
+        <ul class="flex-c">
+            <li><a href="#main">Skip to page main content</a></li>
+            <li><a href="#footer">Skip to page footer</a></li>
+        </ul>
+    </div>
     <header>
         <div class="container flex">
             <div class="logo flex">
@@ -130,8 +135,8 @@
                         
                         <div class="tablist flex" role="tablist">
                             <button class="tab cinnamon" id="tab-1" role="tab" aria-selected="true">Cinnamon</button>
-                            <button class="tab mate" id="tab-2" role="tab" aria-selected="false">MATE</button>
-                            <button class="tab xfce" id="tab-3" role="tab" aria-selected="false">Xfce</button>
+                            <button class="tab mate" id="tab-2" role="tab" aria-selected="false" tabindex="-1">MATE</button>
+                            <button class="tab xfce" id="tab-3" role="tab" aria-selected="false" tabindex="-1">Xfce</button>
                         </div>
                     </div>
                     <div class="appretiation flex">
@@ -281,6 +286,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         jQuery(document).ready(function(){
+            // open menu
             $('.menu-mobile').on('click', function(){
                 $(this).next().addClass('expand').find('.menu-mobile-close').focus()
                 $(this).attr({
@@ -295,10 +301,12 @@
                     role: 'presentation'
                 })
             })
+            // close menu
             $('.menu-mobile-close').on('click', function(){
                 $('*[aria-hidden][role="presentation"]').removeAttr('role aria-hidden')
                 $(this).parent().removeClass('expand').prev().focus()
             })
+            // GE dropdown
             $('.has-submenu').on('click', function(){
                 $(this).attr('aria-expanded', function(index, attr){
                     return attr == 'false' ? 'true' : 'false'
@@ -312,6 +320,31 @@
             $('.nav > ul > li > a').on('focus', function(){
                 $(this).parent().siblings().find('> .expand').removeClass('expand')
                 .prev().attr('aria-expanded', 'false').removeClass('active')
+            })
+            // tabpanel
+            $('.carousel .tablist .tab').on('click', function(){
+                var curr = $(this).attr('id')
+                $(this).addClass('active').attr('aria-selected', 'true').removeAttr('tabindex').focus()
+                .siblings().removeClass('active').attr({
+                    'aria-selected': 'false',
+                    tabindex: '-1'
+                })
+                .parent().siblings().removeClass('active').siblings('[aria-labelledby="' + curr + '"]').addClass('active')
+            })
+            .on('keydown', function(e){
+                if(e.which == 37){
+                    if($(this).prev().length){
+                        $(this).prev().click()
+                    } else {
+                        $(this).siblings().last().click()
+                    }
+                } else if(e.which == 39){
+                    if($(this).next().length){
+                        $(this).next().click()
+                    } else {
+                        $(this).siblings().first().click()
+                    }
+                }
             })
         })
     </script>

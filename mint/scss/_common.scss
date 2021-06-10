@@ -77,3 +77,20 @@ h4{
 *:focus, *[tabindex]:focus{
     outline: 2px dashed #000;
 }
+.skip-to-links{
+    ul{
+        li{
+            display: flex;
+        }
+    }
+    a{
+        padding: 1rem;
+        position: absolute;
+        top: -500px;
+        transition: all .5s;
+        background-color: #fff;
+        &:focus{
+            top: 0;
+        }
+    }
+}
