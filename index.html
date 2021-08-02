@@ -30,7 +30,17 @@
                 </button>
                 <ul class="flex">
                     <li class="flex"><a href="index.html">Home</a></li>
-                    <li class="flex"><a href="about.html">About Me</a></li>
+                    <li class="flex">
+                        <a href="about.html">About Me</a>
+                        <button class="sub">
+                            submenu
+                        </button>
+                        <div class="submenu">
+                            <ul><li><a href="#">Link1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li></ul>
+                        </div>
+                    </li>
                     <li class="flex"><a href="#">Resume</a></li>
                     <li class="flex"><a href="#">Experience</a></li>
                     <li class="flex"><a href="#">Contact</a></li>
@@ -200,6 +210,13 @@
                $(this).parents('.dialog').removeClass('open')
                .siblings().removeAttr('aria-hidden').find('*:not(i)').removeAttr('aria-hidden role')
                $('.trigger').focus()
+           })
+
+           $('.sub').on('click', function(){
+               $(this).next().toggleClass('show')
+               if($(this).next().is(':visible')){
+                $(this).next().find('a').eq(0).focus()
+               }
            })
         })
     </script>
