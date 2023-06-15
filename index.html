@@ -4,30 +4,185 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage | Aleksandar Popov</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/style.css">
+    <title>Početna | Advokatska kancelarija Jančic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <header id="header">
-
+    <header>
+        <nav class="nav container wrap">
+            <a href="index.html" class="logo">
+                <img src="/img/icons8-scale-50.png" alt="">
+                <div class="logo-text">
+                    <div class="top">Advokatska</div>
+                    <div class="bottom">kancelarija Jančic</div>
+                </div>
+            </a>
+            <ul>
+                <li><a href="index.html">
+                    Početna
+                </a></li>
+                <li><a href="">
+                    O nama
+                </a></li>
+                <li><a href="#services">
+                    Usluge
+                </a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
     </header>
-    <main id="main">
-        <h1 class="sr-only">Homepage</h1>
-    </main>
-    <footer id="footer" class="footer" role="contentinfo" aria-labelledby="footer-title">
-        <h2 class="sr-only" id="footer-title">Footer</h2>
-        <div class="container">
-            <div class="footer__social">
-                <ul>
-                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i>Linkedin</a></li>
-                    <li><a href="#"><i class="fa-brands fa-github"></i>GitHub</a></li>
+    <main>
+        <section class="home flex align-center">
+            <div class="overlay"></div>
+            <div class="container center">
+                <h1>Qui suo iure utitur, neminen laedit.</h1>
+                <p>- Ko koristi svoje pravo, nikome ne nanosi štetu</p>
+
+                <!-- ili "Ignorantia iuris nocet" - neznanje prava skodi -->
+                <div class="highlight flex wrap align-center">
+                    Saznajte Vaša prava <a href="#contact" class="outline">Zakažite termin</a>
+                </div>
+            </div>
+        </section>
+        <section class="about" id="about">
+            <div class="container">
+                <h2 class="m-auto sec-title">
+                    O nama
+                </h2>
+            </div>
+        </section>
+        <section class="services" id="services">
+            <div class="container">
+                <h2 class="m-auto sec-title">
+                    Usluge
+                </h2>
+                <ul class="grid grid-col-3">
+                    <li>                        
+                        <div class="service flex-c align-center">
+                            <i class="fa-solid fa-4x fa-building"></i>
+                            <h3>Privredno pravo</h3>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis quasi possimus nisi debitis quos expedita.</p>
+                            <a href="#" class="learn-more">Pročitaj više</a>
+                        </div>
+                    </li>
+                    <li>                        
+                        <div class="service flex-c align-center">
+                            <i class="fa-solid fa-briefcase fa-4x"></i>
+                            <h3>Radno pravo</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas eos quasi animi harum maiores iste in dignissimos quo ab facere?</p>
+                            <a href="#" class="learn-more">Pročitaj više</a>
+                        </div>
+                    </li>
+                    <li>                        
+                        <div class="service flex-c align-center">
+                            <i class="fa-solid fa-4x fa-handcuffs"></i>
+                            <h3>Krivicno pravo</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas eos quasi animi harum maiores iste in dignissimos quo ab facere?</p>
+                            <a href="#" class="learn-more">Pročitaj više</a>
+                        </div>
+                    </li>
+                    <li>                        
+                        <div class="service flex-c align-center">
+                            <i class="fa-solid fa-4x fa-truck"></i>
+                            <h3>Obligaciono pravo</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas eos quasi animi harum maiores iste in dignissimos quo ab facere?</p>
+                            <a href="#" class="learn-more">Pročitaj više</a>
+                        </div>
+                    </li>
+                    <li>                        
+                        <div class="service flex-c align-center">
+                            <i class="fa-solid fa-user-group fa-4x"></i>
+                            <h3>Porodicno pravo</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas eos quasi animi harum maiores iste in dignissimos quo ab facere?</p>
+                            <a href="#" class="learn-more">Pročitaj više</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="service flex-c align-center">
+                            <i class="fa-regular fa-file fa-4x"></i>
+                            <h3>Ugovorno pravo</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas eos quasi animi harum maiores iste in dignissimos quo ab facere?</p>
+                            <a href="#" class="learn-more">Pročitaj više</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="service flex-c align-center">
+                            <i class="fa-solid fa-gift fa-4x"></i>
+                            <h3>Nasledno pravo</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, illo.</p>
+                            <a href="#" class="learn-more">Pročitaj više</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="service flex-c align-center">
+                            <i class="fa-solid fa-4x fa-credit-card"></i>
+                            <h3>Poresko pravo</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, odit! Veritatis ipsam assumenda inventore minima?</p>
+                            <a href="#" class="learn-more">Pročitaj više</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="service flex-c align-center">
+                            <i class="fa-solid fa-4x fa-house"></i>
+                            <h3>Imovinsko pravo</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, odit! Veritatis ipsam assumenda inventore minima?</p>
+                            <a href="#" class="learn-more">Pročitaj više</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="service flex-c align-center">
+                            <i class="fa-regular fa-4x fa-handshake"></i>
+                            <h3>Parnicno pravo</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, odit! Veritatis ipsam assumenda inventore minima?</p>
+                            <a href="#" class="learn-more">Pročitaj više</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
-            <div class="footer__copy">
-                &copy;  All rights reserved.
+        </section>
+        <section class="contact flex-c align-center" id="contact">
+            <div class="container">
+                <h2 class="m-auto sec-title">Kontakt</h2>
+                <div class="top">
+                    <h3>Zakažite pravne konsultacije</h3>
+                    Potražite savet naših iskusnih advokata oko vaših pravnih problema <br> <br>
+                    <strong>Adresa:</strong> Vaska Pope 1, Vršac, 26300 <br>
+                    <strong>Telefon: </strong> 013/839-041 <br>
+                    <strong>Radno vreme:</strong> <br>
+                    Pon-Pet : 9h-12h i 16-19h <br>
+                    Subotom i nedeljom : ne radimo
+                    <div class="info flex">
+                        <div class="left border-1">
+                            <strong>Advokat:</strong> Nebojša Jančic
+                            <br>
+                            <strong>Telefon:</strong> 063/267-152
+                            <br>
+                            <strong>Email:</strong> <a href="#">test email</a>
+                        </div>
+                        <div class="right border-1">
+                            <strong>Advokat:</strong> Milica Jančic
+                            <br>
+                            <strong>Telefon:</strong> 063/267-152
+                            <br>
+                            <strong>Email:</strong> <a href="#">test email</a>
+                        </div>
+                    </div>
+                </div>     
+            </div>
+            <iframe scrolling="no" marginheight="0" marginwidth="0" id="gmap_canvas" src="https://maps.google.com/maps?width=280&amp;height=280&amp;hl=en&amp;q=vaska%20pope%201%20Vr%C5%A1ac+(Jancic)&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="100%" height="400px" frameborder="0"></iframe>
+        </section>
+    </main>
+    <footer>
+        <div class="container flex">
+            <div class="left">
+                &copy;<script>document.write(new Date().getFullYear());</script> Sva prava su zadržana.
+            </div>
+            <div class="right">
+                <a href="#">Vrh stranice <i class="fa-solid fa-arrow-up"></i></a>
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>
