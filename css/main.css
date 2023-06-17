@@ -32,7 +32,7 @@ ul {
 
 .sec-title {
   font-size: 2.2rem;
-  margin: 1rem auto 3rem auto !important;
+  margin: 0 auto 3rem auto !important;
   text-align: center;
 }
 
@@ -81,6 +81,7 @@ header .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 1rem;
 }
 header .nav ul {
   display: flex;
@@ -127,6 +128,9 @@ footer .container {
   }
 }
 @media screen and (max-width: 767px) {
+  .sec-title {
+    font-size: 1.8rem;
+  }
   .grid-col-3 {
     grid-template-columns: 1fr;
   }
@@ -202,6 +206,10 @@ footer .container {
   margin: 1rem;
 }
 
+.home-about {
+  background-image: url("/img/about.jpg");
+}
+
 .services {
   background-color: #efefef;
 }
@@ -212,6 +220,22 @@ footer .container {
   padding: 1rem;
   min-height: 270px;
   justify-content: space-around;
+}
+
+.about {
+  background-color: #efefef;
+}
+.about .container {
+  padding-bottom: 0;
+}
+.about .top, .about .bottom {
+  gap: 1rem;
+}
+.about .top > *, .about .bottom > * {
+  width: 50%;
+}
+.about .top .about-content, .about .bottom .about-content {
+  padding: 3rem 0;
 }
 
 .contact {
@@ -229,11 +253,38 @@ footer .container {
 }
 
 @media screen and (max-width: 767px) {
+  .home .container h1 {
+    font-size: 2rem;
+  }
   .home a {
     margin: 1rem;
   }
   .contact .info {
     flex-wrap: wrap;
+  }
+  .about .container {
+    padding-bottom: 1rem;
+  }
+  .about .top .about-content, .about .bottom .about-content {
+    padding-top: 1rem;
+  }
+  .about .bottom {
+    margin-top: 2rem;
+  }
+  .about .bottom .about-content {
+    padding-bottom: 2rem;
+  }
+}
+@media screen and (max-width: 1023px) {
+  .about .top, .about .bottom {
+    flex-direction: column;
+    width: 100%;
+  }
+  .about .top > *, .about .bottom > * {
+    width: 100%;
+  }
+  .about .bottom {
+    flex-direction: column-reverse;
   }
 }
 

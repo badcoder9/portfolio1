@@ -43,6 +43,9 @@
         }
     }
 }
+.home-about{
+    background-image: url("/img/about.jpg");
+}
 .services{
     background-color: #efefef;
     .service{
@@ -52,12 +55,23 @@
         padding: 1rem;
         min-height: 270px;
         justify-content: space-around;
-        // .learn-more{
-        //     margin-top: 1rem;
-        // }
     }
 }
-
+.about{
+    background-color: #efefef;
+    .container{
+        padding-bottom: 0;
+    }
+    .top, .bottom{
+        gap: 1rem;        
+        > *{
+            width: 50%;
+        }
+        .about-content{
+            padding: 3rem 0;
+        }
+    }
+}
 .contact{
     font-size: 1.1rem;
     h3{
@@ -75,6 +89,11 @@
 
 @media screen and (max-width: 767px){
     .home{
+        .container{
+            h1{
+                font-size: 2rem;
+            }
+        }        
         a{
             margin: 1rem;
         }
@@ -83,5 +102,37 @@
         .info{
             flex-wrap: wrap;
         }
+    }
+    .about{
+        .container{
+            padding-bottom: 1rem;
+        }
+        .top, .bottom{
+            .about-content{
+                padding-top: 1rem;
+            }
+        }
+        .bottom{
+            margin-top: 2rem;
+            .about-content{
+                padding-bottom: 2rem;
+            }
+        }
+    }
+}
+@media screen and (max-width: 1023px){
+    .about{
+        .top, .bottom{
+            flex-direction: column;
+            width: 100%;
+            // gap: 0;
+            > *{
+                width: 100%;
+                // border: 1px solid red;
+            }
+        }
+        .bottom{
+            flex-direction: column-reverse;
+        }        
     }
 }
