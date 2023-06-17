@@ -283,6 +283,9 @@ footer .container {
   .about .top > *, .about .bottom > * {
     width: 100%;
   }
+  .about .top .about-content, .about .bottom .about-content {
+    padding: 1rem 0 3rem 0;
+  }
   .about .bottom {
     flex-direction: column-reverse;
   }
