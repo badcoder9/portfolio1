@@ -72,6 +72,13 @@
         }
     }
 }
+.law-service{
+    background-color: #efefef;
+    .law-title{
+        font-size: 2.3rem;
+        text-align: center;
+    }
+}
 .contact{
     font-size: 1.1rem;
     h3{
@@ -117,6 +124,11 @@
             .about-content{
                 padding-bottom: 2rem;
             }
+        }
+    }
+    .law-service{
+        .law-title{
+            font-size: 2.3rem;
         }
     }
 }
