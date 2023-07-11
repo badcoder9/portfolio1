@@ -235,9 +235,6 @@ footer .container {
 .about .container {
   padding-bottom: 0;
 }
-.about .top, .about .bottom {
-  gap: 1rem;
-}
 .about .top > *, .about .bottom > * {
   width: 50%;
 }
@@ -247,6 +244,9 @@ footer .container {
 .about .top .about-content h3, .about .bottom .about-content h3 {
   margin: 1rem 0;
   font-size: 1.5rem;
+}
+.about .top .about-content h3, .about .top .about-content p, .about .bottom .about-content h3, .about .bottom .about-content p {
+  padding: 0 1rem;
 }
 
 .law-service {
@@ -290,6 +290,9 @@ footer .container {
   .about .top .about-content h3, .about .bottom .about-content h3 {
     margin: 0 0 1rem 0;
     font-size: 1.35rem;
+  }
+  .about .top .about-content h3, .about .top .about-content p, .about .bottom .about-content h3, .about .bottom .about-content p {
+    padding: 0;
   }
   .about .bottom {
     margin-top: 2rem;
