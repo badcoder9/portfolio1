@@ -1,9 +1,18 @@
 label{
-    display: block;
+    display: flex;
     padding: 1rem;
+    gap: .5rem;
+    align-items: center;
 
     input{
         transform: scale(1.5);
         border: 2px solid;
+
+        +span{
+            display: none;
+        }
+        &:checked + span{
+            display: block;
+        }
     }
 }
