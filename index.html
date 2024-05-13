@@ -30,7 +30,12 @@
     </fieldset>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-qFOQ9YFAeGj1gDOuUD61g3D+tLDv3u1ECYWqT82WQoaWrOhAY+5mRMTTVsQdWutbA5FORCnkEPEgU0OF8IzGvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        
+        $(document).ready(function(){
+            var check = $('input')
+            check.on('click', function(){
+                localStorage.setItem($(this).attr('name'), 'true')
+            })
+        })
     </script>
 </body>
 </html>
