@@ -33,8 +33,11 @@
         jQuery(document).ready(function(){
             var check = $('input')
             check.on('click', function(){
-                localStorage.setItem($(this).attr('name'), 'true')
+                localStorage.setItem('id', $(this).attr('name'))
             })
+
+            var targetState = localStorage.getItem('id')
+            $('input[name="'+targetState+'"]').prop( "checked" )
         })
     </script>
 </body>
