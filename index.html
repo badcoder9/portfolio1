@@ -8,12 +8,32 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $("input").click(function(){
-                localStorage.setItem('id', $(this).attr('name'))
+       $(document).ready(function(){
+            $("#car").click(function(){
+                localStorage.setItem('carid', $(this).attr('id'))
+                if($(this).is(':checked')){                    
+                    localStorage.setItem('carstate', 'true')
+                } else {
+                    localStorage.setItem('carstate', 'false')
+                }
             });
-            var targetState = localStorage.getItem('id')
-            $('input[name="'+targetState+'"]').prop( "checked" )
+            $("#doors").click(function(){
+                localStorage.setItem('doorid', $(this).attr('id'))
+                if($(this).is(':checked')){                    
+                    localStorage.setItem('doorstate', 'true')
+                } else {
+                    localStorage.setItem('doorstate', 'false')
+                }
+            });
+            if(localStorage.length){
+                var targetId = localStorage.getItem('carid')
+                var targetState = localStorage.getItem('carstate')
+                $('input[id="'+targetId+'"]').prop(targetState)
+
+                var targetId2 = localStorage.getItem('doorid')
+                var targetState2 = localStorage.getItem('doorstate')
+                $('input[id="'+targetId2+'"]').prop(targetState2)
+            }
         });
     </script>
 </head>
