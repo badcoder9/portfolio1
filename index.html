@@ -28,12 +28,20 @@
             var targetId = localStorage.getItem('carid')
             var targetState = localStorage.getItem('carstate')
             console.log('carState = ', targetState)
-            $('#'+targetId).prop('checked', targetState)
-
+            if(targetState == 'true'){
+                $('#'+targetId).prop('checked', true)
+            } else {
+                $('#'+targetId).prop('checked', false)
+            }
             var targetId2 = localStorage.getItem('doorid')
             var targetState2 = localStorage.getItem('doorstate')
             console.log('doorState = ', targetState2)
             $('input[id="'+targetId2+'"]').prop('checked', targetState2)
+            if(targetState2 == 'true'){
+                $('#'+targetId2).prop('checked', true)
+            } else {
+                $('#'+targetId2).prop('checked', false)
+            }
         });
     </script>
 </head>
