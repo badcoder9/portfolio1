@@ -27,11 +27,11 @@
             });
             if(localStorage.length){
                 var targetId = localStorage.getItem('carid')
-                var targetState = localStorage.getItem('carstate')
+                var targetState = parseInt(localStorage.getItem('carstate'))
                 $('input[id="'+targetId+'"]').prop('checked', targetState)
 
                 var targetId2 = localStorage.getItem('doorid')
-                var targetState2 = localStorage.getItem('doorstate')
+                var targetState2 = parseInt(localStorage.getItem('doorstate'))
                 $('input[id="'+targetId2+'"]').prop('checked', targetState2)
             }
         });
