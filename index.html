@@ -6,7 +6,16 @@
     <title>Test</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/main.css">
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("input").click(function(){
+                localStorage.setItem('id', $(this).attr('name'))
+            });
+            var targetState = localStorage.getItem('id')
+            $('input[name="'+targetState+'"]').prop( "checked" )
+        });
+    </script>
 </head>
 <body>
     <h1>Locksmith</h1>
@@ -28,17 +37,5 @@
             <input type="checkbox" name="car" id="car">
         </label> -->
     </fieldset>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-qFOQ9YFAeGj1gDOuUD61g3D+tLDv3u1ECYWqT82WQoaWrOhAY+5mRMTTVsQdWutbA5FORCnkEPEgU0OF8IzGvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        jQuery(document).ready(function(){
-            var check = $('input')
-            check.on('click', function(){
-                localStorage.setItem('id', $(this).attr('name'))
-            })
-
-            var targetState = localStorage.getItem('id')
-            $('input[name="'+targetState+'"]').prop( "checked" )
-        })
-    </script>
 </body>
 </html>
