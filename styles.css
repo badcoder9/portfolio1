@@ -1,0 +1,68 @@
+:root, .theme-dark{
+  /* Chosen to exceed 4.5:1 contrast in both themes */
+  --bg:#0b0c10;
+  --panel:#14161a;
+  --text:#f2f4f8;
+  --muted:#d6dae1; /* high-contrast muted on dark */
+  --border:#2b3038;
+  --primary:#1240c8; /* dark blue for white text, >4.5:1 */
+  --danger:#b00020;  /* dark red for white text */
+  --success:#2e7d32; /* dark green for white text */
+  --focus:#ffd166;
+}
+.theme-light{
+  --bg:#ffffff;
+  --panel:#ffffff;
+  --text:#111418;
+  --muted:#1f2937; /* high-contrast muted on light */
+  --border:#d0d7e2;
+  --primary:#1240c8; /* same dark blue for consistent contrast */
+  --danger:#9c1b1b;
+  --success:#1b5e20;
+  --focus:#5b7cfa;
+}
+@media (prefers-color-scheme: light){:root{--bg:#ffffff;--panel:#ffffff;--text:#111418;--muted:#1f2937;--border:#d0d7e2;--primary:#1a5cff;--danger:#9c1b1b;--success:#1b5e20;--focus:#5b7cfa}}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica Neue,Arial}
+.skip-link{position:absolute;left:0;top:-40px;background:var(--focus);color:#000;padding:8px 12px;z-index:100}
+.skip-link:focus{top:0}
+.site-header,.site-footer,.container{max-width:960px;margin:0 auto;padding:16px}
+.lang-row{display:flex;gap:8px;align-items:center}
+.toolbar{display:flex;gap:8px;align-items:center;margin:8px 0 16px;flex-wrap:wrap}
+.export-group{display:flex;gap:8px;flex-wrap:wrap}
+.status{color:var(--text);min-height:1.25em}
+.btn{border:1px solid var(--border);background:var(--panel);color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
+.btn.primary{background:var(--primary);color:#fff;border:1px solid transparent}
+.btn.danger{background:var(--danger);color:#fff;border:1px solid transparent}
+.btn.success{background:var(--success);color:#fff;border:1px solid transparent}
+.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:12px}
+.table{width:100%;border-collapse:collapse;min-width:720px}
+.table th,.table td{border-bottom:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}
+.table thead th{background:#0f1115}
+@media (prefers-color-scheme: light){.table thead th{background:#eef2f7}}
+/* Ensure contrast when theme is forced */
+.theme-light .table thead th{background:#eef2f7;color:#111418}
+.theme-dark .table thead th{background:#0f1115;color:#f2f4f8}
+.field{display:flex;flex-direction:column;gap:6px}
+input,textarea,select{background:#0f1115;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+@media (prefers-color-scheme: light){input,textarea,select{background:#ffffff;color:#111418;border-color:#9aa3ae}}
+.theme-light input,.theme-light textarea,.theme-light select{background:#ffffff;color:#111418;border-color:#9aa3ae}
+.theme-dark input,.theme-dark textarea,.theme-dark select{background:#0f1115;color:#f2f4f8;border-color:#2b3038}
+input:focus,textarea:focus,select:focus,.btn:focus{outline:2px solid var(--focus);outline-offset:2px}
+.fieldset{border:1px solid var(--border);border-radius:12px;padding:12px;margin:12px 0;background:#161a20}
+@media (prefers-color-scheme: light){.fieldset{background:#f8fafc}}
+/* Ensure contrast when theme is forced */
+.theme-light .fieldset{background:#f8fafc;border-color:#c7cfdb}
+.theme-dark .fieldset{background:#161a20;border-color:#2b3038}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:720px){.grid-3,.grid-2{grid-template-columns:1fr}}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(2px)}
+.modal{position:fixed;inset:auto;left:50%;top:10%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--border);border-radius:12px;max-width:640px;width:calc(100% - 32px);padding:16px;box-shadow:0 12px 32px rgba(0,0,0,.6); height: 80vh; overflow-y: auto;}
+.modal-header{margin-bottom:8px}
+.help{color:var(--muted)}
+
+.section-title{margin:16px 0 8px;font-size:1.1rem;color:var(--text)}
+
+

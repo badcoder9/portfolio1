@@ -1,0 +1,475 @@
+// Local-storage CRUD with accessible modal dialogs and i18n
+
+const STORAGE_KEY = 'appointments.v1';
+const LANG_KEY = 'appointments.lang';
+const THEME_KEY = 'appointments.theme';
+
+// i18n strings
+const I18N = {
+  en: {
+    title: 'Appointments',
+    language_label: 'Language',
+    add_appointment: 'Add appointment',
+    export_csv: 'Export CSV',
+    export_active_csv: 'Export active CSV',
+    export_completed_csv: 'Export completed CSV',
+    theme_label: 'Theme',
+    theme_system: 'System',
+    theme_light: 'Light',
+    theme_dark: 'Dark',
+    th_title: 'Title', th_date: 'Date', th_time: 'Time', th_description: 'Description', th_actions: 'Actions', th_complete: 'Complete',
+    empty_state: 'No appointments yet.',
+    empty_completed: 'No completed appointments.',
+    active_title: 'Upcoming appointments',
+    completed_title: 'Completed appointments',
+    dialog_add_title: 'Add appointment',
+    dialog_edit_title: 'Edit appointment',
+    dialog_desc: 'Fill the details and press Save. Press Escape to close.',
+    label_title: 'Title', label_description: 'Description',
+    legend_date: 'Date', label_day: 'Day', label_month: 'Month', label_year: 'Year',
+    legend_time: 'Time', label_hour: 'Hour (24h)', label_minute: 'Minute',
+    save: 'Save', cancel: 'Cancel', edit: 'Edit',
+    dialog_delete_title: 'Delete appointment',
+    dialog_delete_desc: 'Are you sure you want to delete this appointment?',
+    delete: 'Delete',
+    mark_complete: 'Mark complete',
+    title_required: 'Title is required.',
+    updated: 'Appointment updated.', added: 'Appointment added.', deleted: 'Appointment deleted.',
+    csv_filename: 'appointments.csv'
+  },
+  de: {
+    title: 'Termine',
+    language_label: 'Sprache',
+    add_appointment: 'Termin hinzufügen',
+    export_csv: 'CSV exportieren',
+    export_active_csv: 'Aktive CSV exportieren',
+    export_completed_csv: 'Abgeschlossene CSV exportieren',
+    theme_label: 'Design',
+    theme_system: 'System',
+    theme_light: 'Hell',
+    theme_dark: 'Dunkel',
+    th_title: 'Titel', th_date: 'Datum', th_time: 'Zeit', th_description: 'Beschreibung', th_actions: 'Aktionen', th_complete: 'Abschließen',
+    empty_state: 'Noch keine Termine.',
+    empty_completed: 'Keine abgeschlossenen Termine.',
+    active_title: 'Bevorstehende Termine',
+    completed_title: 'Abgeschlossene Termine',
+    dialog_add_title: 'Termin hinzufügen',
+    dialog_edit_title: 'Termin bearbeiten',
+    dialog_desc: 'Füllen Sie die Details aus und klicken Sie auf Speichern. Drücken Sie Escape zum Schließen.',
+    label_title: 'Titel', label_description: 'Beschreibung',
+    legend_date: 'Datum', label_day: 'Tag', label_month: 'Monat', label_year: 'Jahr',
+    legend_time: 'Zeit', label_hour: 'Stunde (24h)', label_minute: 'Minute',
+    save: 'Speichern', cancel: 'Abbrechen', edit: 'Bearbeiten',
+    dialog_delete_title: 'Termin löschen',
+    dialog_delete_desc: 'Möchten Sie diesen Termin wirklich löschen?',
+    delete: 'Löschen',
+    mark_complete: 'Abschließen',
+    title_required: 'Titel ist erforderlich.',
+    updated: 'Termin aktualisiert.', added: 'Termin hinzugefügt.', deleted: 'Termin gelöscht.',
+    csv_filename: 'termine.csv'
+  },
+  sr: {
+    title: 'Zakazani termini',
+    language_label: 'Jezik',
+    add_appointment: 'Dodaj termin',
+    export_csv: 'Izvezi CSV',
+    export_active_csv: 'Izvezi aktivne CSV',
+    export_completed_csv: 'Izvezi završene CSV',
+    theme_label: 'Tema',
+    theme_system: 'Sistem',
+    theme_light: 'Svetla',
+    theme_dark: 'Tamna',
+    th_title: 'Naziv', th_date: 'Datum', th_time: 'Vreme', th_description: 'Opis', th_actions: 'Akcije', th_complete: 'Završi',
+    empty_state: 'Još nema termina.',
+    empty_completed: 'Nema završenih termina.',
+    active_title: 'Predstojeći termini',
+    completed_title: 'Završeni termini',
+    dialog_add_title: 'Dodaj termin',
+    dialog_edit_title: 'Uredi termin',
+    dialog_desc: 'Popunite detalje i pritisnite Sačuvaj. Pritisnite Escape za zatvaranje.',
+    label_title: 'Naziv', label_description: 'Opis',
+    legend_date: 'Datum', label_day: 'Dan', label_month: 'Mesec', label_year: 'Godina',
+    legend_time: 'Vreme', label_hour: 'Sat (24h)', label_minute: 'Minut',
+    save: 'Sačuvaj', cancel: 'Otkaži', edit: 'Uredi',
+    dialog_delete_title: 'Obriši termin',
+    dialog_delete_desc: 'Da li ste sigurni da želite da obrišete termin?',
+    delete: 'Obriši',
+    mark_complete: 'Završi',
+    title_required: 'Naziv je obavezan.',
+    updated: 'Termin je ažuriran.', added: 'Termin je dodat.', deleted: 'Termin je obrisan.',
+    csv_filename: 'termini.csv'
+  }
+};
+
+// Elements
+const addBtn = document.getElementById('addBtn');
+const exportActiveBtn = document.getElementById('exportActiveBtn');
+const exportCompletedBtn = document.getElementById('exportCompletedBtn');
+const statusEl = document.getElementById('status');
+const tableBody = document.getElementById('appointmentsBody');
+const completedBody = document.getElementById('completedBody');
+const yearNow = document.getElementById('yearNow');
+const langSelect = document.getElementById('langSelect');
+const themeSelect = document.getElementById('themeSelect');
+
+// Dialogs
+const overlay = document.getElementById('overlay');
+const dialog = document.getElementById('appointmentDialog');
+const dialogTitle = document.getElementById('dialogTitle');
+const confirmDialog = document.getElementById('confirmDialog');
+let lastFocusedBeforeDialog = null;
+
+// Form fields
+const appointmentForm = document.getElementById('appointmentForm');
+const titleInput = document.getElementById('titleInput');
+const descInput = document.getElementById('descInput');
+const daySelect = document.getElementById('daySelect');
+const monthSelect = document.getElementById('monthSelect');
+const yearSelect = document.getElementById('yearSelect');
+const hourSelect = document.getElementById('hourSelect');
+const minuteSelect = document.getElementById('minuteSelect');
+const saveBtn = document.getElementById('saveBtn');
+const cancelBtn = document.getElementById('cancelBtn');
+const formStatus = document.getElementById('formStatus');
+
+// Data
+let appointments = loadAppointments();
+let editingId = null;
+
+// Initialize UI after DOM is ready
+function initializeUI() {
+  try {
+    yearNow.textContent = new Date().getFullYear();
+    populateDateTimeSelects();
+    renderAppointments();
+    initLanguage();
+    initTheme();
+
+    addBtn.addEventListener('click', () => openAppointmentDialog());
+    exportActiveBtn.addEventListener('click', () => exportCsv('active'));
+    exportCompletedBtn.addEventListener('click', () => exportCsv('completed'));
+    cancelBtn.addEventListener('click', () => closeDialog(dialog, true));
+    langSelect.addEventListener('change', () => {
+      const lang = langSelect.value;
+      localStorage.setItem(LANG_KEY, lang);
+      applyLanguage(lang);
+    });
+    themeSelect.addEventListener('change', () => {
+      const theme = themeSelect.value;
+      localStorage.setItem(THEME_KEY, theme);
+      applyTheme(theme);
+    });
+  } catch (err) {
+    console.error('Initialization error:', err);
+    statusEl.textContent = String(err);
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeUI);
+} else {
+  initializeUI();
+}
+
+appointmentForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const item = collectFormData();
+  if (!item) return;
+  if (editingId) {
+    const idx = appointments.findIndex((a) => a.id === editingId);
+    if (idx !== -1) {
+      appointments[idx] = { ...item, id: editingId };
+      persist();
+      statusEl.textContent = t('updated');
+    }
+  } else {
+    appointments.push({ ...item, id: generateId() });
+    persist();
+    statusEl.textContent = t('added');
+  }
+  renderAppointments();
+  closeDialog(dialog, false); // close on success
+});
+
+// Delete confirmation
+let pendingDeleteId = null;
+document.getElementById('confirmYes').addEventListener('click', () => {
+  if (!pendingDeleteId) return closeDialog(confirmDialog, true);
+  appointments = appointments.filter((a) => a.id !== pendingDeleteId);
+  pendingDeleteId = null;
+  persist();
+  renderAppointments();
+  statusEl.textContent = t('deleted');
+  closeDialog(confirmDialog, true);
+});
+document.getElementById('confirmNo').addEventListener('click', () => closeDialog(confirmDialog, true));
+
+// Language change is attached in initializeUI
+
+// Functions
+function loadAppointments(){
+  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }catch{ return []; }
+}
+function persist(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(appointments)); }
+
+function populateDateTimeSelects(){
+  // Day 1..31
+  daySelect.innerHTML = '';
+  for (let d=1; d<=31; d++) addOption(daySelect, d.toString().padStart(2,'0'), d);
+  // Month 1..12
+  monthSelect.innerHTML = '';
+  for (let m=1; m<=12; m++) addOption(monthSelect, m.toString().padStart(2,'0'), m);
+  // Year: current year preselected, provide a small range current-5..current+5
+  const currentYear = new Date().getFullYear();
+  yearSelect.innerHTML = '';
+  for (let y=currentYear-5; y<=currentYear+5; y++) addOption(yearSelect, y.toString(), y);
+  yearSelect.value = currentYear.toString();
+
+  // Hour 0..23
+  hourSelect.innerHTML = '';
+  for (let h=0; h<=23; h++) addOption(hourSelect, h.toString().padStart(2,'0'), h);
+  // Minute 0..55 step 5
+  minuteSelect.innerHTML = '';
+  for (let m=0; m<=55; m+=5) addOption(minuteSelect, m.toString().padStart(2,'0'), m);
+}
+
+function addOption(select, label, value){
+  const opt = document.createElement('option');
+  opt.textContent = label;
+  opt.value = String(value);
+  select.appendChild(opt);
+}
+
+function openAppointmentDialog(appt){
+  // Prepare form
+  formStatus.textContent = '';
+  if (appt){
+    editingId = appt.id;
+    dialogTitle.setAttribute('data-i18n', 'dialog_edit_title');
+    dialogTitle.textContent = t('dialog_edit_title');
+    titleInput.value = appt.title || '';
+    descInput.value = appt.description || '';
+    daySelect.value = String(appt.day).padStart(2,'0');
+    monthSelect.value = String(appt.month).padStart(2,'0');
+    yearSelect.value = String(appt.year);
+    hourSelect.value = String(appt.hour).padStart(2,'0');
+    minuteSelect.value = String(appt.minute).padStart(2,'0');
+  } else {
+    editingId = null;
+    dialogTitle.setAttribute('data-i18n', 'dialog_add_title');
+    dialogTitle.textContent = t('dialog_add_title');
+    appointmentForm.reset();
+    // Defaults to current date/time (year preselected by populate)
+    const now = new Date();
+    daySelect.value = String(now.getDate()).padStart(2,'0');
+    monthSelect.value = String(now.getMonth()+1).padStart(2,'0');
+    yearSelect.value = String(now.getFullYear());
+    hourSelect.value = String(now.getHours()).padStart(2,'0');
+    const mins = now.getMinutes();
+    const rounded = Math.round(mins/5)*5;
+    minuteSelect.value = String(rounded % 60).padStart(2,'0');
+  }
+  lastFocusedBeforeDialog = document.activeElement;
+  showModal(dialog);
+  titleInput.focus();
+}
+
+function collectFormData(){
+  const title = titleInput.value.trim();
+  if (!title){ formStatus.textContent = t('title_required'); return null; }
+  const description = descInput.value.trim();
+  const day = parseInt(daySelect.value,10);
+  const month = parseInt(monthSelect.value,10);
+  const year = parseInt(yearSelect.value,10);
+  const hour = parseInt(hourSelect.value,10);
+  const minute = parseInt(minuteSelect.value,10);
+  return { title, description, day, month, year, hour, minute, completed: false };
+}
+
+function renderAppointments(){
+  const active = appointments.filter(a => !a.completed);
+  const completed = appointments.filter(a => a.completed);
+
+  // Active
+  tableBody.innerHTML = '';
+  if (active.length === 0){
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 5; td.textContent = t('empty_state');
+    tr.appendChild(td); tableBody.appendChild(tr);
+  }
+  for (const a of active){
+    const tr = document.createElement('tr');
+    const dateStr = `${String(a.day).padStart(2,'0')}.${String(a.month).padStart(2,'0')}.${a.year}`;
+    const timeStr = `${String(a.hour).padStart(2,'0')}:${String(a.minute).padStart(2,'0')}`;
+    tr.innerHTML = `
+      <td>${escapeHtml(a.title)}</td>
+      <td>${dateStr}</td>
+      <td>${timeStr}</td>
+      <td>${escapeHtml(a.description || '')}</td>
+      <td>
+        <button class="btn" data-action="edit" data-id="${a.id}" aria-label="${t('edit')} ${escapeAttr(a.title)}">${t('edit')}</button>
+        <button class="btn danger" data-action="delete" data-id="${a.id}" aria-label="${t('delete')} ${escapeAttr(a.title)}">${t('delete')}</button>
+        <button class="btn success" data-action="complete" data-id="${a.id}" aria-label="${t('mark_complete')} ${escapeAttr(a.title)}">${t('mark_complete')}</button>
+      </td>`;
+    tableBody.appendChild(tr);
+  }
+
+  // Completed
+  completedBody.innerHTML = '';
+  if (completed.length === 0){
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 4; td.textContent = t('empty_completed');
+    tr.appendChild(td); completedBody.appendChild(tr);
+  } else {
+    for (const a of completed){
+      const tr = document.createElement('tr');
+      const dateStr = `${String(a.day).padStart(2,'0')}.${String(a.month).padStart(2,'0')}.${a.year}`;
+      const timeStr = `${String(a.hour).padStart(2,'0')}:${String(a.minute).padStart(2,'0')}`;
+      tr.innerHTML = `
+        <td>${escapeHtml(a.title)}</td>
+        <td>${dateStr}</td>
+        <td>${timeStr}</td>
+        <td>${escapeHtml(a.description || '')}</td>`;
+      completedBody.appendChild(tr);
+    }
+  }
+}
+
+tableBody.addEventListener('click', (e) => {
+  const target = e.target;
+  if (!(target instanceof HTMLElement)) return;
+  const action = target.getAttribute('data-action');
+  const id = target.getAttribute('data-id');
+  if (!action || !id) return;
+  const appt = appointments.find(a => a.id === id);
+  if (!appt) return;
+  if (action === 'edit') openAppointmentDialog(appt);
+  if (action === 'delete') { pendingDeleteId = id; openConfirmDialog(); }
+  if (action === 'complete') { markComplete(id); }
+});
+
+function markComplete(id){
+  const idx = appointments.findIndex(a => a.id === id);
+  if (idx === -1) return;
+  appointments[idx].completed = true;
+  persist();
+  renderAppointments();
+}
+
+function openConfirmDialog(){
+  lastFocusedBeforeDialog = document.activeElement;
+  showModal(confirmDialog);
+  document.getElementById('confirmNo').focus();
+}
+
+// Modal helpers (ARIA pattern inspired by WAI-ARIA APG)
+function showModal(el){
+  overlay.hidden = false; el.hidden = false;
+  trapFocus(el);
+  document.addEventListener('keydown', onEscClose, { once: true });
+}
+function closeDialog(el, restoreFocus){
+  el.hidden = true; overlay.hidden = true; releaseFocus();
+  if (restoreFocus && lastFocusedBeforeDialog instanceof HTMLElement) lastFocusedBeforeDialog.focus();
+}
+
+let focusTrapHandlers = null;
+function trapFocus(container){
+  const focusable = container.querySelectorAll('a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])');
+  const first = focusable[0]; const last = focusable[focusable.length-1];
+  focusTrapHandlers = (e) => {
+    if (e.key !== 'Tab') return;
+    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  };
+  container.addEventListener('keydown', focusTrapHandlers);
+}
+function releaseFocus(){
+  if (!focusTrapHandlers) return;
+  dialog.removeEventListener('keydown', focusTrapHandlers);
+  confirmDialog.removeEventListener('keydown', focusTrapHandlers);
+  focusTrapHandlers = null;
+}
+function onEscClose(e){ if (e.key === 'Escape'){ if (!dialog.hidden) closeDialog(dialog, true); if (!confirmDialog.hidden) closeDialog(confirmDialog, true); } }
+
+// Close dialog when clicking on overlay (topmost only)
+overlay.addEventListener('click', () => {
+  if (!confirmDialog.hidden) { closeDialog(confirmDialog, true); return; }
+  if (!dialog.hidden) { closeDialog(dialog, true); }
+});
+
+// CSV export (separate for active/completed)
+function exportCsv(type){
+  const source = type === 'completed' ? appointments.filter(a=>a.completed) : appointments.filter(a=>!a.completed);
+  const header = ['Title','Description','Day','Month','Year','Hour','Minute'];
+  const rows = source.map(a => [a.title,a.description||'',a.day,a.month,a.year,a.hour,a.minute]);
+  const csv = [header, ...rows].map(r => r.map(csvEscape).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const isCompleted = type === 'completed';
+  const base = isCompleted ? 'completed' : 'active';
+  a.href = url; a.download = `${base}-` + (t('csv_filename') || 'appointments.csv');
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+function csvEscape(value){
+  const s = String(value ?? '');
+  if (/[",\n]/.test(s)) return '"' + s.replace(/"/g,'""') + '"';
+  return s;
+}
+
+// Language
+function initLanguage(){
+  const lang = localStorage.getItem(LANG_KEY) || 'en';
+  langSelect.value = lang; applyLanguage(lang);
+}
+function applyLanguage(lang){
+  const dict = I18N[lang] || I18N.en;
+  document.documentElement.lang = lang;
+  // Update elements with data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (!key) return;
+    el.textContent = dict[key] ?? I18N.en[key] ?? '';
+  });
+  // Also update dynamic labels in buttons inside table
+  renderAppointments();
+}
+function t(key){
+  const lang = langSelect.value || 'en';
+  return (I18N[lang] && I18N[lang][key]) || I18N.en[key] || key;
+}
+
+// Theme
+function initTheme(){
+  const value = localStorage.getItem(THEME_KEY) || 'system';
+  const select = document.getElementById('themeSelect');
+  if (select) select.value = value;
+  applyTheme(value);
+}
+function applyTheme(value){
+  const root = document.documentElement;
+  root.classList.remove('theme-light','theme-dark');
+  if (value === 'light') root.classList.add('theme-light');
+  else if (value === 'dark') root.classList.add('theme-dark');
+  // 'system' leaves classes off so OS preference applies
+}
+
+// Utils
+function escapeHtml(str){
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+function escapeAttr(str){ return escapeHtml(str).replace(/`/g,'&#096;'); }
+
+// Expose open for external buttons
+window.openAppointmentDialog = openAppointmentDialog;
+
+function generateId(){
+  try { if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID(); } catch {}
+  return 'id-' + Date.now() + '-' + Math.random().toString(36).slice(2,8);
+}
+
+
