@@ -1,1 +1,0 @@
-// Registration is disabled for this app.

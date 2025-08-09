@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Appointments</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- <a class="skip-link" href="#main">{{skipToContent}}</a> -->
+
+  <header class="header">
+    <h1 id="page-title" data-i18n="title">Appointments</h1>
+
+    <div class="lang-row" aria-labelledby="language-label">
+      <label id="language-label" for="language-select" data-i18n="language">Language</label>
+      <select id="language-select" aria-describedby="language-help">
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+        <option value="sr">Srpski</option>
+      </select>
+      <p id="language-help" class="help" data-i18n="languageHelp">
+        Your choice is remembered for next time.
+      </p>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <div class="toolbar">
+      <button id="add-appointment-btn"
+              class="btn primary"
+              data-i18n="addAppointment"
+              aria-haspopup="dialog"
+              aria-controls="appointment-dialog">
+        Add appointment
+      </button>
+
+      <button id="export-csv-btn" class="btn" data-i18n="exportCsv">
+        Export CSV
+      </button>
+    </div>
+
+    <section aria-labelledby="appointments-heading">
+      <h2 id="appointments-heading" class="sr-only" data-i18n="appointmentsHeading">
+        Appointments list
+      </h2>
+
+      <div id="empty-state" class="empty" data-i18n="emptyState">
+        No appointments yet. Click “Add appointment” to create your first one.
+      </div>
+
+      <div class="table-wrap" role="region" aria-labelledby="appointments-table-caption">
+        <table class="table" id="appointments-table">
+          <caption id="appointments-table-caption" data-i18n="appointmentsCaption">Appointments</caption>
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="colTitle">Title</th>
+              <th scope="col" data-i18n="colDescription">Description</th>
+              <th scope="col" data-i18n="colDate">Date</th>
+              <th scope="col" data-i18n="colTime">Time</th>
+              <th scope="col" class="col-actions" data-i18n="colActions">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="appointments-tbody">
+            <!-- rows injected here -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Add/Edit Appointment Dialog -->
+  <div class="dialog-backdrop" id="appointment-backdrop" hidden></div>
+
+  <div
+    class="dialog"
+    id="appointment-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="appointment-dialog-title"
+    aria-describedby="appointment-dialog-desc"
+    hidden
+  >
+    <div class="dialog-header">
+      <h2 id="appointment-dialog-title" data-i18n="addDialogTitle">Add appointment</h2>
+    </div>
+
+    <p id="appointment-dialog-desc" class="help" data-i18n="dialogHelp">
+      All fields marked with * are required. Press Escape to cancel.
+    </p>
+
+    <form id="appointment-form" novalidate>
+      <input type="hidden" id="appointment-id" />
+
+      <div class="field">
+        <label for="title" data-i18n="labelTitle">Name/Title *</label>
+        <input id="title" name="title" type="text" autocomplete="off" required />
+        <div class="error" id="title-error" role="alert"></div>
+      </div>
+
+      <div class="field">
+        <label for="description" data-i18n="labelDescription">Description</label>
+        <textarea id="description" name="description" rows="3"></textarea>
+        <div class="error" id="description-error" role="alert"></div>
+      </div>
+
+      <fieldset class="field">
+        <legend data-i18n="labelDate">Date *</legend>
+
+        <div class="row">
+          <div class="col">
+            <label for="day" data-i18n="labelDay">Day</label>
+            <select id="day" name="day" required></select>
+            <div class="error" id="day-error" role="alert"></div>
+          </div>
+
+          <div class="col">
+            <label for="month" data-i18n="labelMonth">Month</label>
+            <select id="month" name="month" required></select>
+            <div class="error" id="month-error" role="alert"></div>
+          </div>
+
+          <div class="col">
+            <label for="year" data-i18n="labelYear">Year</label>
+            <select id="year" name="year" required></select>
+            <div class="error" id="year-error" role="alert"></div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend data-i18n="labelTime">Time *</legend>
+        <div class="row">
+          <div class="col">
+            <label for="hour" data-i18n="labelHour">Hour (24h)</label>
+            <select id="hour" name="hour" required></select>
+            <div class="error" id="hour-error" role="alert"></div>
+          </div>
+
+          <div class="col">
+            <label for="minute" data-i18n="labelMinute">Minutes</label>
+            <select id="minute" name="minute" required></select>
+            <div class="error" id="minute-error" role="alert"></div>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="dialog-actions">
+        <button type="button" class="btn" id="cancel-btn" data-i18n="cancel">Cancel</button>
+        <button type="submit" class="btn primary" id="save-btn" data-i18n="save">Save</button>
+      </div>
+    </form>
+
+    <button type="button" class="dialog-close" id="appointment-close" aria-label="Close">×</button>
+  </div>
+
+  <!-- Delete confirm Dialog -->
+  <div class="dialog-backdrop" id="confirm-backdrop" hidden></div>
+
+  <div
+    class="dialog"
+    id="confirm-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="confirm-title"
+    aria-describedby="confirm-desc"
+    hidden
+  >
+    <div class="dialog-header">
+      <h2 id="confirm-title" data-i18n="deleteDialogTitle">Delete appointment</h2>
+    </div>
+
+    <p id="confirm-desc" data-i18n="deleteDialogDesc">
+      Are you sure you want to delete this appointment?
+    </p>
+
+    <div class="dialog-actions">
+      <button type="button" class="btn" id="confirm-cancel" data-i18n="cancel">Cancel</button>
+      <button type="button" class="btn danger" id="confirm-delete" data-i18n="delete">Delete</button>
+    </div>
+
+    <button type="button" class="dialog-close" id="confirm-close" aria-label="Close">×</button>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/dialog.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
