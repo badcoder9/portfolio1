@@ -44,6 +44,13 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-appl
 /* Ensure contrast when theme is forced */
 .theme-light .table thead th{background:#eef2f7;color:#111418}
 .theme-dark .table thead th{background:#0f1115;color:#f2f4f8}
+
+.sort-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:0;padding:0;color:inherit;cursor:pointer;font:inherit}
+.sort-btn:hover{text-decoration:underline}
+.sort-btn:focus{outline:2px solid var(--focus);outline-offset:2px;border-radius:6px;text-decoration:underline}
+.sort-icon{display:inline-block;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid currentColor;opacity:.7}
+.aria-sort-asc .sort-icon{transform:rotate(180deg)}
+.aria-sort-none .sort-icon{opacity:.4}
 .field{display:flex;flex-direction:column;gap:6px}
 input,textarea,select{background:#0f1115;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
 @media (prefers-color-scheme: light){input,textarea,select{background:#ffffff;color:#111418;border-color:#9aa3ae}}

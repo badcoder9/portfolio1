@@ -50,9 +50,19 @@
         <table id="appointmentsTable" class="table">
           <thead>
             <tr>
-              <th scope="col" data-i18n="th_title">Title</th>
+              <th scope="col" id="thActiveTitle" aria-sort="none">
+                <button id="btnSortActiveTitle" class="sort-btn" type="button">
+                  <span data-i18n="th_title">Title</span>
+                  <span class="sort-icon" aria-hidden="true"></span>
+                </button>
+              </th>
               <th scope="col" data-i18n="th_description">Description</th>
-              <th scope="col" data-i18n="th_date">Date</th>
+              <th scope="col" id="thActiveDate" aria-sort="none">
+                <button id="btnSortActiveDate" class="sort-btn" type="button">
+                  <span data-i18n="th_date">Date</span>
+                  <span class="sort-icon" aria-hidden="true"></span>
+                </button>
+              </th>
               <th scope="col" data-i18n="th_time">Time</th>
               <th scope="col" data-i18n="th_actions">Actions</th>
             </tr>
@@ -73,9 +83,19 @@
         <table id="completedTable" class="table">
           <thead>
             <tr>
-              <th scope="col" data-i18n="th_title">Title</th>
+              <th scope="col" id="thCompletedTitle" aria-sort="none">
+                <button id="btnSortCompletedTitle" class="sort-btn" type="button">
+                  <span data-i18n="th_title">Title</span>
+                  <span class="sort-icon" aria-hidden="true"></span>
+                </button>
+              </th>
               <th scope="col" data-i18n="th_description">Description</th>
-              <th scope="col" data-i18n="th_date">Date</th>
+              <th scope="col" id="thCompletedDate" aria-sort="none">
+                <button id="btnSortCompletedDate" class="sort-btn" type="button">
+                  <span data-i18n="th_date">Date</span>
+                  <span class="sort-icon" aria-hidden="true"></span>
+                </button>
+              </th>
               <th scope="col" data-i18n="th_time">Time</th>
             </tr>
           </thead>

@@ -119,6 +119,14 @@ const tableBody = document.getElementById('appointmentsBody');
 const completedBody = document.getElementById('completedBody');
 const searchActive = document.getElementById('searchActive');
 const searchCompleted = document.getElementById('searchCompleted');
+const btnSortActiveTitle = document.getElementById('btnSortActiveTitle');
+const btnSortActiveDate = document.getElementById('btnSortActiveDate');
+const btnSortCompletedTitle = document.getElementById('btnSortCompletedTitle');
+const btnSortCompletedDate = document.getElementById('btnSortCompletedDate');
+const thActiveTitle = document.getElementById('thActiveTitle');
+const thActiveDate = document.getElementById('thActiveDate');
+const thCompletedTitle = document.getElementById('thCompletedTitle');
+const thCompletedDate = document.getElementById('thCompletedDate');
 const yearNow = document.getElementById('yearNow');
 const langSelect = document.getElementById('langSelect');
 const themeSelect = document.getElementById('themeSelect');
@@ -147,6 +155,10 @@ const formStatus = document.getElementById('formStatus');
 // Data
 let appointments = loadAppointments();
 let editingId = null;
+let sortState = {
+  active: { key: 'date', dir: 'asc' }, // default: date ascending
+  completed: { key: 'date', dir: 'asc' }
+};
 
 // Initialize UI after DOM is ready
 function initializeUI() {
@@ -172,6 +184,11 @@ function initializeUI() {
       applyTheme(theme);
     });
     importInput.addEventListener('change', handleImportCsv);
+    // Sorting handlers
+    btnSortActiveTitle.addEventListener('click', () => toggleSort('active','title'));
+    btnSortActiveDate.addEventListener('click', () => toggleSort('active','date'));
+    btnSortCompletedTitle.addEventListener('click', () => toggleSort('completed','title'));
+    btnSortCompletedDate.addEventListener('click', () => toggleSort('completed','date'));
     searchActive.addEventListener('input', renderAppointments);
     searchCompleted.addEventListener('input', renderAppointments);
   } catch (err) {
@@ -306,8 +323,23 @@ function renderAppointments(){
   const qCraw = (searchCompleted?.value || '').toLowerCase();
   const qAok = qAraw.length >= 3;
   const qCok = qCraw.length >= 3;
-  const active = appointments.filter(a => !a.completed && (!qAok || a.title.toLowerCase().includes(qAraw)));
-  const completed = appointments.filter(a => a.completed && (!qCok || a.title.toLowerCase().includes(qCraw)));
+  let active = appointments.filter(a => !a.completed && (!qAok || a.title.toLowerCase().includes(qAraw)));
+  let completed = appointments.filter(a => a.completed && (!qCok || a.title.toLowerCase().includes(qCraw)));
+
+  // Sort active
+  if (sortState.active.key){
+    active = [...active].sort((a,b) => compareBy(sortState.active.key, sortState.active.dir, a, b));
+  }
+  // Sort completed
+  if (sortState.completed.key){
+    completed = [...completed].sort((a,b) => compareBy(sortState.completed.key, sortState.completed.dir, a, b));
+  }
+
+  // Update aria-sort
+  updateAriaSort(thActiveTitle, sortState.active, 'title');
+  updateAriaSort(thActiveDate, sortState.active, 'date');
+  updateAriaSort(thCompletedTitle, sortState.completed, 'title');
+  updateAriaSort(thCompletedDate, sortState.completed, 'date');
 
   // Active
   tableBody.innerHTML = '';
@@ -375,6 +407,39 @@ function markComplete(id){
   appointments[idx].completed = true;
   persist();
   renderAppointments();
+}
+
+function toggleSort(scope, key){
+  const state = sortState[scope];
+  if (state.key !== key){
+    state.key = key; state.dir = 'asc';
+  } else {
+    state.dir = state.dir === 'asc' ? 'desc' : (state.dir === 'desc' ? 'none' : 'asc');
+    if (state.dir === 'none') state.key = null;
+  }
+  renderAppointments();
+}
+
+function compareBy(key, dir, a, b){
+  if (dir === 'none') return 0;
+  let va, vb;
+  if (key === 'title'){ va = (a.title||'').toLowerCase(); vb = (b.title||'').toLowerCase(); }
+  else if (key === 'date'){
+    // Build comparable number YYYYMMDDHHMM for strict order including time
+    const na = Number(`${String(a.year).padStart(4,'0')}${String(a.month).padStart(2,'0')}${String(a.day).padStart(2,'0')}${String(a.hour).padStart(2,'0')}${String(a.minute).padStart(2,'0')}`);
+    const nb = Number(`${String(b.year).padStart(4,'0')}${String(b.month).padStart(2,'0')}${String(b.day).padStart(2,'0')}${String(b.hour).padStart(2,'0')}${String(b.minute).padStart(2,'0')}`);
+    va = na; vb = nb;
+  } else { return 0; }
+  const cmp = va < vb ? -1 : va > vb ? 1 : 0;
+  return dir === 'asc' ? cmp : -cmp;
+}
+
+function updateAriaSort(th, state, key){
+  if (!th) return;
+  const isActive = state.key === key ? state.dir : 'none';
+  th.setAttribute('aria-sort', isActive === 'none' ? 'none' : (isActive === 'asc' ? 'ascending' : 'descending'));
+  th.classList.toggle('aria-sort-asc', isActive === 'asc');
+  th.classList.toggle('aria-sort-none', isActive === 'none');
 }
 
 function openConfirmDialog(){
