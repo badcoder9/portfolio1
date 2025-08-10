@@ -64,5 +64,7 @@ input:focus,textarea:focus,select:focus,.btn:focus{outline:2px solid var(--focus
 .help{color:var(--muted)}
 
 .section-title{margin:16px 0 8px;font-size:1.1rem;color:var(--text)}
+.filter-row{display:flex;gap:8px;align-items:center;margin:8px 0 12px;flex-wrap:wrap}
+.help-inline{color:var(--muted); font-size:.9em}
 
 

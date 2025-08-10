@@ -34,19 +34,26 @@
         <div class="export-group">
           <button id="exportActiveBtn" class="btn" data-i18n="export_active_csv">Export active CSV</button>
           <button id="exportCompletedBtn" class="btn" data-i18n="export_completed_csv">Export completed CSV</button>
+          <label for="importCsv" class="btn" id="importLabel" data-i18n="import_csv">Import CSV</label>
+          <input id="importCsv" type="file" accept=".csv,text/csv" hidden />
         </div>
         <span id="status" class="status" role="status" aria-live="polite"></span>
       </div>
 
       <h2 class="section-title" data-i18n="active_title">Upcoming appointments</h2>
+      <div class="filter-row">
+        <label for="searchActive" data-i18n="filter_title">Filter by title</label>
+        <span class="help-inline" data-i18n="filter_help">(min 3 characters)</span>
+        <input id="searchActive" type="search" />
+      </div>
       <div class="table-wrap" role="region" aria-label="Appointments list">
         <table id="appointmentsTable" class="table">
           <thead>
             <tr>
               <th scope="col" data-i18n="th_title">Title</th>
+              <th scope="col" data-i18n="th_description">Description</th>
               <th scope="col" data-i18n="th_date">Date</th>
               <th scope="col" data-i18n="th_time">Time</th>
-              <th scope="col" data-i18n="th_description">Description</th>
               <th scope="col" data-i18n="th_actions">Actions</th>
             </tr>
           </thead>
@@ -57,14 +64,19 @@
       </div>
 
       <h2 class="section-title" data-i18n="completed_title">Completed appointments</h2>
+      <div class="filter-row">
+        <label for="searchCompleted" data-i18n="filter_title">Filter by title</label>
+        <span class="help-inline" data-i18n="filter_help">(min 3 characters)</span>
+        <input id="searchCompleted" type="search" />
+      </div>
       <div class="table-wrap" role="region" aria-label="Completed appointments list">
         <table id="completedTable" class="table">
           <thead>
             <tr>
               <th scope="col" data-i18n="th_title">Title</th>
+              <th scope="col" data-i18n="th_description">Description</th>
               <th scope="col" data-i18n="th_date">Date</th>
               <th scope="col" data-i18n="th_time">Time</th>
-              <th scope="col" data-i18n="th_description">Description</th>
             </tr>
           </thead>
           <tbody id="completedBody">

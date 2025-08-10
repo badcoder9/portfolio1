@@ -7,6 +7,9 @@ const THEME_KEY = 'appointments.theme';
 // i18n strings
 const I18N = {
   en: {
+    import_csv: 'Import CSV',
+    filter_title: 'Filter by title',
+    filter_help: '(min 3 characters)',
     title: 'Appointments',
     language_label: 'Language',
     add_appointment: 'Add appointment',
@@ -38,6 +41,9 @@ const I18N = {
     csv_filename: 'appointments.csv'
   },
   de: {
+    import_csv: 'CSV importieren',
+    filter_title: 'Nach Titel filtern',
+    filter_help: '(mind. 3 Zeichen)',
     title: 'Termine',
     language_label: 'Sprache',
     add_appointment: 'Termin hinzufügen',
@@ -69,6 +75,9 @@ const I18N = {
     csv_filename: 'termine.csv'
   },
   sr: {
+    import_csv: 'Uvezi CSV',
+    filter_title: 'Filtriraj po nazivu',
+    filter_help: '(min. 3 karaktera)',
     title: 'Zakazani termini',
     language_label: 'Jezik',
     add_appointment: 'Dodaj termin',
@@ -108,9 +117,12 @@ const exportCompletedBtn = document.getElementById('exportCompletedBtn');
 const statusEl = document.getElementById('status');
 const tableBody = document.getElementById('appointmentsBody');
 const completedBody = document.getElementById('completedBody');
+const searchActive = document.getElementById('searchActive');
+const searchCompleted = document.getElementById('searchCompleted');
 const yearNow = document.getElementById('yearNow');
 const langSelect = document.getElementById('langSelect');
 const themeSelect = document.getElementById('themeSelect');
+const importInput = document.getElementById('importCsv');
 
 // Dialogs
 const overlay = document.getElementById('overlay');
@@ -159,6 +171,9 @@ function initializeUI() {
       localStorage.setItem(THEME_KEY, theme);
       applyTheme(theme);
     });
+    importInput.addEventListener('change', handleImportCsv);
+    searchActive.addEventListener('input', renderAppointments);
+    searchCompleted.addEventListener('input', renderAppointments);
   } catch (err) {
     console.error('Initialization error:', err);
     statusEl.textContent = String(err);
@@ -287,8 +302,12 @@ function collectFormData(){
 }
 
 function renderAppointments(){
-  const active = appointments.filter(a => !a.completed);
-  const completed = appointments.filter(a => a.completed);
+  const qAraw = (searchActive?.value || '').toLowerCase();
+  const qCraw = (searchCompleted?.value || '').toLowerCase();
+  const qAok = qAraw.length >= 3;
+  const qCok = qCraw.length >= 3;
+  const active = appointments.filter(a => !a.completed && (!qAok || a.title.toLowerCase().includes(qAraw)));
+  const completed = appointments.filter(a => a.completed && (!qCok || a.title.toLowerCase().includes(qCraw)));
 
   // Active
   tableBody.innerHTML = '';
@@ -304,9 +323,9 @@ function renderAppointments(){
     const timeStr = `${String(a.hour).padStart(2,'0')}:${String(a.minute).padStart(2,'0')}`;
     tr.innerHTML = `
       <td>${escapeHtml(a.title)}</td>
+      <td>${escapeHtml(a.description || '')}</td>
       <td>${dateStr}</td>
       <td>${timeStr}</td>
-      <td>${escapeHtml(a.description || '')}</td>
       <td>
         <button class="btn" data-action="edit" data-id="${a.id}" aria-label="${t('edit')} ${escapeAttr(a.title)}">${t('edit')}</button>
         <button class="btn danger" data-action="delete" data-id="${a.id}" aria-label="${t('delete')} ${escapeAttr(a.title)}">${t('delete')}</button>
@@ -329,9 +348,9 @@ function renderAppointments(){
       const timeStr = `${String(a.hour).padStart(2,'0')}:${String(a.minute).padStart(2,'0')}`;
       tr.innerHTML = `
         <td>${escapeHtml(a.title)}</td>
+        <td>${escapeHtml(a.description || '')}</td>
         <td>${dateStr}</td>
-        <td>${timeStr}</td>
-        <td>${escapeHtml(a.description || '')}</td>`;
+        <td>${timeStr}</td>`;
       completedBody.appendChild(tr);
     }
   }
@@ -403,7 +422,7 @@ overlay.addEventListener('click', () => {
 // CSV export (separate for active/completed)
 function exportCsv(type){
   const source = type === 'completed' ? appointments.filter(a=>a.completed) : appointments.filter(a=>!a.completed);
-  const header = ['Title','Description','Day','Month','Year','Hour','Minute'];
+  const header = [t('th_title'),t('th_description'),t('label_day'),t('label_month'),t('label_year'),t('label_hour'),t('label_minute')];
   const rows = source.map(a => [a.title,a.description||'',a.day,a.month,a.year,a.hour,a.minute]);
   const csv = [header, ...rows].map(r => r.map(csvEscape).join(',')).join('\n');
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -414,6 +433,90 @@ function exportCsv(type){
   a.href = url; a.download = `${base}-` + (t('csv_filename') || 'appointments.csv');
   document.body.appendChild(a); a.click(); a.remove();
   URL.revokeObjectURL(url);
+}
+
+async function handleImportCsv(evt){
+  const file = evt.target.files && evt.target.files[0];
+  if (!file) return;
+  try {
+    const text = await file.text();
+    const parsed = parseCsv(text);
+    const header = parsed.shift() || [];
+    // Map header indices in a case-insensitive way (supports EN/DE/SR)
+    const h = header.map(h => h.trim().toLowerCase());
+    const idx = {
+      title: findHeaderIndex(h, ['title','titel','naziv']),
+      description: findHeaderIndex(h, ['description','beschreibung','opis']),
+      day: findHeaderIndex(h, ['day','tag','dan']),
+      month: findHeaderIndex(h, ['month','monat','mesec','mesec']),
+      year: findHeaderIndex(h, ['year','jahr','godina']),
+      hour: findHeaderIndex(h, ['hour','stunde','sat']),
+      minute: findHeaderIndex(h, ['minute','minute','minut']),
+    };
+    const imported = [];
+    for (const row of parsed){
+      const get = (i) => i >= 0 ? row[i] : '';
+      const title = String(get(idx.title) || '').trim();
+      if (!title) continue;
+      const description = String(get(idx.description) || '').trim();
+      const day = clampInt(get(idx.day), 1, 31);
+      const month = clampInt(get(idx.month), 1, 12);
+      const year = clampInt(get(idx.year), 1900, 3000);
+      const hour = clampInt(get(idx.hour), 0, 23);
+      const minute = clampInt(get(idx.minute), 0, 59);
+      imported.push({ id: generateId(), title, description, day, month, year, hour, minute, completed: false });
+    }
+    if (imported.length){
+      appointments = appointments.concat(imported);
+      persist();
+      renderAppointments();
+      statusEl.textContent = `Imported ${imported.length} item(s).`;
+    } else {
+      statusEl.textContent = 'No valid rows found.';
+    }
+  } catch (err) {
+    statusEl.textContent = 'Import failed.';
+    console.error(err);
+  } finally {
+    evt.target.value = '';
+  }
+}
+
+function parseCsv(text){
+  const rows = [];
+  let cur = '';
+  let inQuotes = false;
+  let row = [];
+  for (let i=0;i<text.length;i++){
+    const ch = text[i];
+    if (inQuotes){
+      if (ch === '"' && text[i+1] === '"'){ cur += '"'; i++; }
+      else if (ch === '"'){ inQuotes = false; }
+      else { cur += ch; }
+    } else {
+      if (ch === '"'){ inQuotes = true; }
+      else if (ch === ','){ row.push(cur); cur = ''; }
+      else if (ch === '\n' || ch === '\r'){
+        if (cur !== '' || row.length){ row.push(cur); rows.push(row); row = []; cur=''; }
+      } else { cur += ch; }
+    }
+  }
+  if (cur !== '' || row.length){ row.push(cur); rows.push(row); }
+  return rows;
+}
+
+function findHeaderIndex(headerRow, names){
+  for (const name of names){
+    const i = headerRow.indexOf(String(name).toLowerCase());
+    if (i !== -1) return i;
+  }
+  return -1;
+}
+
+function clampInt(val, min, max){
+  const n = parseInt(String(val||'').trim(), 10);
+  if (Number.isNaN(n)) return min;
+  return Math.min(max, Math.max(min, n));
 }
 function csvEscape(value){
   const s = String(value ?? '');
